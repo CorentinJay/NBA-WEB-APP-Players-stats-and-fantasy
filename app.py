@@ -120,8 +120,11 @@ def format_game_display(row):
     home_team = row['Equipe_Domicile']
     arena = row['Arena']
     
-    time_obj = pd.to_datetime(row['Heure'])
-    time_str = time_obj.strftime('%H:%M')
+    if 'Heure_paris' in row.index:
+        time_str = row['Heure_paris'].strftime('%H:%M')
+    else:
+        time_obj = pd.to_datetime(row['Heure'])
+        time_str = time_obj.strftime('%H:%M')
     
     return f"{time_str} - {away_team} @ {home_team} - {arena}"
 
@@ -129,9 +132,23 @@ def get_today_games():
     try:
         df_schedule = pd.read_parquet('season_schedule.parquet')
         df_schedule['Date'] = pd.to_datetime(df_schedule['Date'])
+        df_schedule['Heure_dt'] = pd.to_datetime(df_schedule['Heure'])
         
-        today = get_french_time().date()
-        today_games = df_schedule[df_schedule['Date'].dt.date == today].copy()
+        paris_tz = pytz.timezone('Europe/Paris')
+        now_paris = datetime.now(paris_tz)
+        today_paris = now_paris.date()
+        tomorrow_paris = (now_paris + pd.Timedelta(days=1)).date()
+        
+        today_games = df_schedule[
+            (df_schedule['Date'].dt.date == today_paris) | 
+            (df_schedule['Date'].dt.date == tomorrow_paris)
+        ].copy()
+        
+        today_games['Heure_paris'] = today_games['Heure_dt'].dt.tz_localize('UTC').dt.tz_convert(paris_tz)
+        
+        today_games = today_games[today_games['Heure_paris'].dt.date == today_paris]
+        
+        today_games = today_games.sort_values('Heure_paris')
         
         return today_games
     except Exception as e:
@@ -140,11 +157,9 @@ def get_today_games():
 
 def get_first_game_time():
     today_games = get_today_games()
-    if not today_games.empty and 'Heure' in today_games.columns:
-        times = today_games['Heure'].dropna()
-        if not times.empty:
-            first_time = pd.to_datetime(times.iloc[0])
-            return first_time.strftime('%H:%M')
+    if not today_games.empty and 'Heure_paris' in today_games.columns:
+        first_time = today_games.iloc[0]['Heure_paris']
+        return first_time.strftime('%H:%M')
     return None
 
 if st.session_state.page == "🏠 Home":
