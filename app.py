@@ -194,23 +194,24 @@ if st.session_state.page == "🏠 Home":
         df_season = pd.read_parquet('player_season.parquet')
         
         stats = {
-            'PTS': '🏀 Points Leaders',
-            'REB': '🔄 Rebounds Leaders',
-            'AST': '🎯 Assists Leaders',
-            'STL': '🖐️ Steals Leaders',
-            'BLK': '🚫 Blocks Leaders'
+            'PTS': '🏀 Points',
+            'REB': '🔄 Rebounds',
+            'AST': '🎯 Assists',
+            'STL': '🖐️ Steals',
+            'BLK': '🚫 Blocks'
         }
         
-        for stat_col, stat_title in stats.items():
-            st.markdown(f"**{stat_title}**")
-            if stat_col in df_season.columns:
-                top_5 = df_season.nlargest(5, stat_col)[['PLAYER', stat_col]]
-                top_5 = top_5.reset_index(drop=True)
-                top_5.index = top_5.index + 1
-                st.dataframe(top_5, use_container_width=True, height=220)
-            else:
-                st.warning(f"{stat_col} column not found")
-            st.markdown("")
+        cols = st.columns(5)
+        
+        for idx, (stat_col, stat_title) in enumerate(stats.items()):
+            with cols[idx]:
+                st.markdown(f"**{stat_title}**")
+                if stat_col in df_season.columns:
+                    top_5 = df_season.nlargest(5, stat_col)[['PLAYER', stat_col]]
+                    top_5 = top_5.reset_index(drop=True)
+                    st.dataframe(top_5, use_container_width=True, height=220, hide_index=True)
+                else:
+                    st.warning(f"{stat_col} not found")
     except Exception as e:
         st.error(f"❌ Error loading season stats: {str(e)}")
     
