@@ -131,7 +131,7 @@ def format_game_display(row):
 def get_today_games():
     try:
         df_schedule = pd.read_parquet('season_schedule.parquet')
-        df_schedule['Date'] = pd.to_datetime(df_schedule['Date'], format='%d/%m/%Y')
+        df_schedule['Date'] = pd.to_datetime(df_schedule['Date'], format='mixed', dayfirst=True)
         
         heure_time = pd.to_datetime(df_schedule['Heure'])
         df_schedule['Heure_complete'] = pd.to_datetime(
