@@ -100,9 +100,12 @@ with st.sidebar:
         "Navigation",
         ["🏠 Home", "👤 Players", "🏥 Injuries", "🔮 Fantasy Predictions"],
         label_visibility="collapsed",
-        key="nav_radio"
+        index=["🏠 Home", "👤 Players", "🏥 Injuries", "🔮 Fantasy Predictions"].index(st.session_state.page)
     )
-    st.session_state.page = page
+    
+    if page != st.session_state.page:
+        st.session_state.page = page
+        st.rerun()
     
     st.markdown("---")
     st.markdown(f"<p style='color: {NBA_WHITE}; text-align: center;'><b>Created by Corentin Jay</b></p>", unsafe_allow_html=True)
@@ -116,7 +119,9 @@ def format_game_display(row):
     away_team = row['Equipe_Exterieur']
     home_team = row['Equipe_Domicile']
     arena = row['Arena']
-    time_str = row['Heure']
+    
+    time_obj = pd.to_datetime(row['Heure'])
+    time_str = time_obj.strftime('%H:%M')
     
     return f"{time_str} - {away_team} @ {home_team} - {arena}"
 
@@ -138,7 +143,8 @@ def get_first_game_time():
     if not today_games.empty and 'Heure' in today_games.columns:
         times = today_games['Heure'].dropna()
         if not times.empty:
-            return times.iloc[0]
+            first_time = pd.to_datetime(times.iloc[0])
+            return first_time.strftime('%H:%M')
     return None
 
 if st.session_state.page == "🏠 Home":
@@ -191,26 +197,22 @@ elif st.session_state.page == "👤 Players":
         try:
             df_season = pd.read_parquet('player_season.parquet')
             
-            cols = st.columns(len(df_season.columns))
-            filters = {}
-            for idx, col in enumerate(df_season.columns):
-                with cols[idx]:
-                    if df_season[col].dtype == 'object':
+            filter_cols = [col for col in df_season.columns if 'PLAYER' in col.upper() or 'TEAM' in col.upper()]
+            
+            if filter_cols:
+                cols = st.columns(len(filter_cols))
+                filters = {}
+                for idx, col in enumerate(filter_cols):
+                    with cols[idx]:
                         unique_values = ['All'] + sorted(df_season[col].dropna().unique().tolist())
                         filters[col] = st.selectbox(f"{col}", unique_values, key=f"season_{col}")
-                    else:
-                        filters[col] = st.text_input(f"{col}", key=f"season_{col}")
-            
-            filtered_df = df_season.copy()
-            for col, filter_val in filters.items():
-                if filter_val and filter_val != 'All':
-                    if df_season[col].dtype == 'object':
+                
+                filtered_df = df_season.copy()
+                for col, filter_val in filters.items():
+                    if filter_val and filter_val != 'All':
                         filtered_df = filtered_df[filtered_df[col] == filter_val]
-                    else:
-                        try:
-                            filtered_df = filtered_df[filtered_df[col].astype(str).str.contains(str(filter_val), na=False)]
-                        except:
-                            pass
+            else:
+                filtered_df = df_season
             
             st.dataframe(filtered_df, use_container_width=True, height=600, hide_index=True)
         except Exception as e:
@@ -222,26 +224,22 @@ elif st.session_state.page == "👤 Players":
         try:
             df_trend = pd.read_parquet('player_trend.parquet')
             
-            cols = st.columns(len(df_trend.columns))
-            filters = {}
-            for idx, col in enumerate(df_trend.columns):
-                with cols[idx]:
-                    if df_trend[col].dtype == 'object':
+            filter_cols = [col for col in df_trend.columns if 'PLAYER' in col.upper() or 'TEAM' in col.upper()]
+            
+            if filter_cols:
+                cols = st.columns(len(filter_cols))
+                filters = {}
+                for idx, col in enumerate(filter_cols):
+                    with cols[idx]:
                         unique_values = ['All'] + sorted(df_trend[col].dropna().unique().tolist())
                         filters[col] = st.selectbox(f"{col}", unique_values, key=f"trend_{col}")
-                    else:
-                        filters[col] = st.text_input(f"{col}", key=f"trend_{col}")
-            
-            filtered_df = df_trend.copy()
-            for col, filter_val in filters.items():
-                if filter_val and filter_val != 'All':
-                    if df_trend[col].dtype == 'object':
+                
+                filtered_df = df_trend.copy()
+                for col, filter_val in filters.items():
+                    if filter_val and filter_val != 'All':
                         filtered_df = filtered_df[filtered_df[col] == filter_val]
-                    else:
-                        try:
-                            filtered_df = filtered_df[filtered_df[col].astype(str).str.contains(str(filter_val), na=False)]
-                        except:
-                            pass
+            else:
+                filtered_df = df_trend
             
             st.dataframe(filtered_df, use_container_width=True, height=600, hide_index=True)
         except Exception as e:
@@ -256,26 +254,22 @@ elif st.session_state.page == "👤 Players":
         try:
             df_career = pd.read_parquet('player_career.parquet')
             
-            cols = st.columns(len(df_career.columns))
-            filters = {}
-            for idx, col in enumerate(df_career.columns):
-                with cols[idx]:
-                    if df_career[col].dtype == 'object':
+            filter_cols = [col for col in df_career.columns if 'PLAYER' in col.upper() or 'TEAM' in col.upper()]
+            
+            if filter_cols:
+                cols = st.columns(len(filter_cols))
+                filters = {}
+                for idx, col in enumerate(filter_cols):
+                    with cols[idx]:
                         unique_values = ['All'] + sorted(df_career[col].dropna().unique().tolist())
                         filters[col] = st.selectbox(f"{col}", unique_values, key=f"career_{col}")
-                    else:
-                        filters[col] = st.text_input(f"{col}", key=f"career_{col}")
-            
-            filtered_df = df_career.copy()
-            for col, filter_val in filters.items():
-                if filter_val and filter_val != 'All':
-                    if df_career[col].dtype == 'object':
+                
+                filtered_df = df_career.copy()
+                for col, filter_val in filters.items():
+                    if filter_val and filter_val != 'All':
                         filtered_df = filtered_df[filtered_df[col] == filter_val]
-                    else:
-                        try:
-                            filtered_df = filtered_df[filtered_df[col].astype(str).str.contains(str(filter_val), na=False)]
-                        except:
-                            pass
+            else:
+                filtered_df = df_career
             
             st.dataframe(filtered_df, use_container_width=True, height=600, hide_index=True)
             
@@ -291,26 +285,22 @@ elif st.session_state.page == "👤 Players":
         try:
             df_info = pd.read_parquet('player_info.parquet')
             
-            cols = st.columns(len(df_info.columns))
-            filters = {}
-            for idx, col in enumerate(df_info.columns):
-                with cols[idx]:
-                    if df_info[col].dtype == 'object':
+            filter_cols = [col for col in df_info.columns if 'PLAYER' in col.upper() or 'TEAM' in col.upper()]
+            
+            if filter_cols:
+                cols = st.columns(len(filter_cols))
+                filters = {}
+                for idx, col in enumerate(filter_cols):
+                    with cols[idx]:
                         unique_values = ['All'] + sorted(df_info[col].dropna().unique().tolist())
                         filters[col] = st.selectbox(f"{col}", unique_values, key=f"info_{col}")
-                    else:
-                        filters[col] = st.text_input(f"{col}", key=f"info_{col}")
-            
-            filtered_df = df_info.copy()
-            for col, filter_val in filters.items():
-                if filter_val and filter_val != 'All':
-                    if df_info[col].dtype == 'object':
+                
+                filtered_df = df_info.copy()
+                for col, filter_val in filters.items():
+                    if filter_val and filter_val != 'All':
                         filtered_df = filtered_df[filtered_df[col] == filter_val]
-                    else:
-                        try:
-                            filtered_df = filtered_df[filtered_df[col].astype(str).str.contains(str(filter_val), na=False)]
-                        except:
-                            pass
+            else:
+                filtered_df = df_info
             
             st.dataframe(filtered_df, use_container_width=True, height=600, hide_index=True)
             
@@ -326,26 +316,22 @@ elif st.session_state.page == "🏥 Injuries":
     try:
         df = pd.read_parquet('injury_list.parquet')
         
-        cols = st.columns(len(df.columns))
-        filters = {}
-        for idx, col in enumerate(df.columns):
-            with cols[idx]:
-                if df[col].dtype == 'object':
+        filter_cols = [col for col in df.columns if 'PLAYER' in col.upper() or 'TEAM' in col.upper()]
+        
+        if filter_cols:
+            cols = st.columns(len(filter_cols))
+            filters = {}
+            for idx, col in enumerate(filter_cols):
+                with cols[idx]:
                     unique_values = ['All'] + sorted(df[col].dropna().unique().tolist())
                     filters[col] = st.selectbox(f"{col}", unique_values, key=f"injury_{col}")
-                else:
-                    filters[col] = st.text_input(f"{col}", key=f"injury_{col}")
-        
-        filtered_df = df.copy()
-        for col, filter_val in filters.items():
-            if filter_val and filter_val != 'All':
-                if df[col].dtype == 'object':
+            
+            filtered_df = df.copy()
+            for col, filter_val in filters.items():
+                if filter_val and filter_val != 'All':
                     filtered_df = filtered_df[filtered_df[col] == filter_val]
-                else:
-                    try:
-                        filtered_df = filtered_df[filtered_df[col].astype(str).str.contains(str(filter_val), na=False)]
-                    except:
-                        pass
+        else:
+            filtered_df = df
         
         st.dataframe(filtered_df, use_container_width=True, height=600, hide_index=True)
         
@@ -365,26 +351,22 @@ elif st.session_state.page == "🔮 Fantasy Predictions":
     try:
         df = pd.read_parquet('fantasy_daily_predictions.parquet')
         
-        cols = st.columns(len(df.columns))
-        filters = {}
-        for idx, col in enumerate(df.columns):
-            with cols[idx]:
-                if df[col].dtype == 'object':
+        filter_cols = [col for col in df.columns if 'PLAYER' in col.upper() or 'TEAM' in col.upper()]
+        
+        if filter_cols:
+            cols = st.columns(len(filter_cols))
+            filters = {}
+            for idx, col in enumerate(filter_cols):
+                with cols[idx]:
                     unique_values = ['All'] + sorted(df[col].dropna().unique().tolist())
                     filters[col] = st.selectbox(f"{col}", unique_values, key=f"fantasy_{col}")
-                else:
-                    filters[col] = st.text_input(f"{col}", key=f"fantasy_{col}")
-        
-        filtered_df = df.copy()
-        for col, filter_val in filters.items():
-            if filter_val and filter_val != 'All':
-                if df[col].dtype == 'object':
+            
+            filtered_df = df.copy()
+            for col, filter_val in filters.items():
+                if filter_val and filter_val != 'All':
                     filtered_df = filtered_df[filtered_df[col] == filter_val]
-                else:
-                    try:
-                        filtered_df = filtered_df[filtered_df[col].astype(str).str.contains(str(filter_val), na=False)]
-                    except:
-                        pass
+        else:
+            filtered_df = df
         
         st.dataframe(filtered_df, use_container_width=True, height=600, hide_index=True)
         
