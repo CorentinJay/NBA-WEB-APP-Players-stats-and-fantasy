@@ -133,19 +133,14 @@ def get_today_games():
         df_schedule = pd.read_parquet('season_schedule.parquet')
         df_schedule['Date'] = pd.to_datetime(df_schedule['Date'], format='mixed', dayfirst=True)
         
-        heure_time = pd.to_datetime(df_schedule['Heure'])
-        df_schedule['Heure_complete_et'] = pd.to_datetime(
-            df_schedule['Date'].dt.strftime('%Y-%m-%d') + ' ' + 
-            heure_time.dt.strftime('%H:%M:%S')
-        )
+        df_schedule['Heure_utc'] = pd.to_datetime(df_schedule['Heure'])
         
-        eastern_tz = pytz.timezone('US/Eastern')
         paris_tz = pytz.timezone('Europe/Paris')
         
-        if df_schedule['Heure_complete_et'].dt.tz is None:
-            df_schedule['Heure_paris'] = df_schedule['Heure_complete_et'].dt.tz_localize(eastern_tz).dt.tz_convert(paris_tz)
+        if df_schedule['Heure_utc'].dt.tz is None:
+            df_schedule['Heure_paris'] = df_schedule['Heure_utc'].dt.tz_localize('UTC').dt.tz_convert(paris_tz)
         else:
-            df_schedule['Heure_paris'] = df_schedule['Heure_complete_et'].dt.tz_convert(paris_tz)
+            df_schedule['Heure_paris'] = df_schedule['Heure_utc'].dt.tz_convert(paris_tz)
         
         now_paris = datetime.now(paris_tz)
         today_paris = now_paris.date()
