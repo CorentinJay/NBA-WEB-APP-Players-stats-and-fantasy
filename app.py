@@ -135,21 +135,16 @@ def get_today_games():
         df_schedule['Heure_dt'] = pd.to_datetime(df_schedule['Heure'])
         
         paris_tz = pytz.timezone('Europe/Paris')
+        
+        if df_schedule['Heure_dt'].dt.tz is None:
+            df_schedule['Heure_paris'] = df_schedule['Heure_dt'].dt.tz_localize('UTC').dt.tz_convert(paris_tz)
+        else:
+            df_schedule['Heure_paris'] = df_schedule['Heure_dt'].dt.tz_convert(paris_tz)
+        
         now_paris = datetime.now(paris_tz)
         today_paris = now_paris.date()
-        tomorrow_paris = (now_paris + pd.Timedelta(days=1)).date()
         
-        today_games = df_schedule[
-            (df_schedule['Date'].dt.date == today_paris) | 
-            (df_schedule['Date'].dt.date == tomorrow_paris)
-        ].copy()
-        
-        if today_games['Heure_dt'].dt.tz is None:
-            today_games['Heure_paris'] = today_games['Heure_dt'].dt.tz_localize('UTC').dt.tz_convert(paris_tz)
-        else:
-            today_games['Heure_paris'] = today_games['Heure_dt'].dt.tz_convert(paris_tz)
-        
-        today_games = today_games[today_games['Heure_paris'].dt.date == today_paris]
+        today_games = df_schedule[df_schedule['Heure_paris'].dt.date == today_paris].copy()
         
         today_games = today_games.sort_values('Heure_paris')
         
