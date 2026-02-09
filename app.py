@@ -170,10 +170,24 @@ def get_first_game_time():
         return first_time.strftime('%H:%M')
     return None
 
-def create_radar_chart(player1_data, player2_data, categories, title, player1_name, player2_name):
+def create_radar_chart(player1_data, player2_data, categories, title, player1_name, player2_name, is_percentage=False):
     """Create a radar chart comparing two players"""
     
     fig = go.Figure()
+    
+    # Determine appropriate range
+    if is_percentage:
+        max_range = 100
+    else:
+        # For classic stats, use a more dynamic range
+        max_val = max(max(player1_data), max(player2_data))
+        # Round up to nearest 5 or 10 for cleaner display
+        if max_val <= 10:
+            max_range = max_val * 1.2
+        elif max_val <= 50:
+            max_range = ((max_val // 5) + 2) * 5
+        else:
+            max_range = ((max_val // 10) + 2) * 10
     
     # Player 1
     fig.add_trace(go.Scatterpolar(
@@ -199,7 +213,12 @@ def create_radar_chart(player1_data, player2_data, categories, title, player1_na
         polar=dict(
             radialaxis=dict(
                 visible=True,
-                range=[0, max(max(player1_data), max(player2_data)) * 1.1]
+                range=[0, max_range],
+                showticklabels=True,
+                tickfont=dict(size=10)
+            ),
+            angularaxis=dict(
+                tickfont=dict(size=12, color='white')
             )
         ),
         showlegend=True,
@@ -213,8 +232,11 @@ def create_radar_chart(player1_data, player2_data, categories, title, player1_na
             yanchor="bottom",
             y=-0.2,
             xanchor="center",
-            x=0.5
-        )
+            x=0.5,
+            font=dict(size=12)
+        ),
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)'
     )
     
     return fig
@@ -470,23 +492,41 @@ elif st.session_state.page == "⚔️ Player VS":
                         valid_classic_stats.append(stat)
                 
                 # Shooting efficiency radar chart
-                shooting_stats = ['FG%', 'FG3%', 'FT%']
+                shooting_stats_map = {
+                    'FG%': 'FG%',
+                    'FG3%': 'FG3%', 
+                    '3P%': 'FG3%',  # Alternative name
+                    'FT%': 'FT%'
+                }
+                
                 shooting_values1 = []
                 shooting_values2 = []
                 valid_shooting_stats = []
                 
-                for stat in shooting_stats:
-                    if stat in df_season.columns:
-                        val1 = player1_stats[stat] if pd.notna(player1_stats[stat]) else 0
-                        val2 = player2_stats[stat] if pd.notna(player2_stats[stat]) else 0
-                        # Convert percentages (if needed)
-                        if val1 > 0 and val1 < 1:
-                            val1 *= 100
-                        if val2 > 0 and val2 < 1:
-                            val2 *= 100
-                        shooting_values1.append(float(val1))
-                        shooting_values2.append(float(val2))
-                        valid_shooting_stats.append(stat)
+                for display_name, possible_names in [('FG%', ['FG%']), ('FG3%', ['FG3%', '3P%']), ('FT%', ['FT%'])]:
+                    found = False
+                    for stat_name in possible_names:
+                        if stat_name in df_season.columns:
+                            val1 = player1_stats[stat_name] if pd.notna(player1_stats[stat_name]) else 0
+                            val2 = player2_stats[stat_name] if pd.notna(player2_stats[stat_name]) else 0
+                            
+                            # Convert to percentage if needed (value between 0-1)
+                            if val1 > 0 and val1 <= 1:
+                                val1 *= 100
+                            if val2 > 0 and val2 <= 1:
+                                val2 *= 100
+                            
+                            shooting_values1.append(float(val1))
+                            shooting_values2.append(float(val2))
+                            valid_shooting_stats.append(display_name)
+                            found = True
+                            break
+                    
+                    if not found:
+                        # Add 0 values for missing stats to keep chart balanced
+                        shooting_values1.append(0)
+                        shooting_values2.append(0)
+                        valid_shooting_stats.append(f"{display_name} (N/A)")
                 
                 # Display charts side by side
                 col1, col2 = st.columns(2)
@@ -499,7 +539,8 @@ elif st.session_state.page == "⚔️ Player VS":
                             valid_classic_stats,
                             "📊 Classic Stats Comparison",
                             player1,
-                            player2
+                            player2,
+                            is_percentage=False
                         )
                         st.plotly_chart(fig1, use_container_width=True)
                     else:
@@ -507,15 +548,20 @@ elif st.session_state.page == "⚔️ Player VS":
                 
                 with col2:
                     if valid_shooting_stats:
-                        fig2 = create_radar_chart(
-                            shooting_values1,
-                            shooting_values2,
-                            valid_shooting_stats,
-                            "🎯 Shooting Efficiency Comparison",
-                            player1,
-                            player2
-                        )
-                        st.plotly_chart(fig2, use_container_width=True)
+                        # Remove "(N/A)" entries if all are N/A
+                        if not all("(N/A)" in stat for stat in valid_shooting_stats):
+                            fig2 = create_radar_chart(
+                                shooting_values1,
+                                shooting_values2,
+                                valid_shooting_stats,
+                                "🎯 Shooting Efficiency Comparison",
+                                player1,
+                                player2,
+                                is_percentage=True
+                            )
+                            st.plotly_chart(fig2, use_container_width=True)
+                        else:
+                            st.warning("No shooting efficiency stats available")
                     else:
                         st.warning("Shooting stats not available")
                 
