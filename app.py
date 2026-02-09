@@ -170,45 +170,31 @@ def get_first_game_time():
         return first_time.strftime('%H:%M')
     return None
 
-def create_radar_chart(player1_data, player2_data, categories, title, player1_name, player2_name, is_percentage=False):
+def create_radar_chart(player1_data, player2_data, categories, title, player1_name, player2_name, is_percentage=False, raw_values1=None, raw_values2=None):
     """Create a radar chart comparing two players with normalized scales"""
     
     fig = go.Figure()
     
-    # Determine appropriate range based on stat type
-    if is_percentage:
-        # Fixed scale for percentages
+    # For normalized classic stats or percentages, use 0-100 scale
+    if is_percentage or raw_values1 is not None:
         max_range = 100
         tick_vals = [0, 20, 40, 60, 80, 100]
     else:
-        # Dynamic scale for classic stats
-        # Find the maximum value across all stats for both players
+        # This shouldn't happen anymore, but keep as fallback
         all_values = player1_data + player2_data
         max_val = max(all_values) if all_values else 1
-        
-        # Calculate appropriate max range
-        if max_val <= 2:
-            max_range = 2.5
-            tick_vals = [0, 0.5, 1, 1.5, 2, 2.5]
-        elif max_val <= 5:
-            max_range = 6
-            tick_vals = [0, 1, 2, 3, 4, 5, 6]
-        elif max_val <= 10:
-            max_range = 12
-            tick_vals = [0, 2, 4, 6, 8, 10, 12]
-        elif max_val <= 20:
-            max_range = 25
-            tick_vals = [0, 5, 10, 15, 20, 25]
-        elif max_val <= 30:
-            max_range = 35
-            tick_vals = [0, 7, 14, 21, 28, 35]
-        elif max_val <= 40:
-            max_range = 45
-            tick_vals = [0, 9, 18, 27, 36, 45]
-        else:
-            # For very high values (like MIN), round up to nearest 10
-            max_range = int((max_val / 10 + 1.5)) * 10
-            tick_vals = [i * max_range / 5 for i in range(6)]
+        max_range = int((max_val / 10 + 1.5)) * 10
+        tick_vals = [i * max_range / 5 for i in range(6)]
+    
+    # Prepare hover templates
+    if raw_values1 is not None and raw_values2 is not None:
+        # For normalized stats, show both normalized and raw values
+        hover1 = [f"{cat}: {raw:.1f}" for cat, raw in zip(categories, raw_values1)]
+        hover2 = [f"{cat}: {raw:.1f}" for cat, raw in zip(categories, raw_values2)]
+    else:
+        # For percentages, just show the value
+        hover1 = [f"{cat}: {val:.1f}%" for cat, val in zip(categories, player1_data)]
+        hover2 = [f"{cat}: {val:.1f}%" for cat, val in zip(categories, player2_data)]
     
     # Player 1
     fig.add_trace(go.Scatterpolar(
@@ -218,7 +204,8 @@ def create_radar_chart(player1_data, player2_data, categories, title, player1_na
         name=player1_name,
         line=dict(color=NBA_BLUE, width=3),
         fillcolor=f'rgba(29, 66, 138, 0.25)',
-        hovertemplate='%{theta}: %{r:.1f}<extra></extra>'
+        text=hover1,
+        hovertemplate='%{text}<extra></extra>'
     ))
     
     # Player 2
@@ -229,7 +216,8 @@ def create_radar_chart(player1_data, player2_data, categories, title, player1_na
         name=player2_name,
         line=dict(color=NBA_RED, width=3),
         fillcolor=f'rgba(200, 16, 46, 0.25)',
-        hovertemplate='%{theta}: %{r:.1f}<extra></extra>'
+        text=hover2,
+        hovertemplate='%{text}<extra></extra>'
     ))
     
     fig.update_layout(
@@ -240,7 +228,8 @@ def create_radar_chart(player1_data, player2_data, categories, title, player1_na
                 showticklabels=True,
                 tickfont=dict(size=11, color='#888'),
                 tickvals=tick_vals,
-                gridcolor='rgba(255, 255, 255, 0.2)'
+                gridcolor='rgba(255, 255, 255, 0.2)',
+                ticksuffix='' if raw_values1 is not None else '%'
             ),
             angularaxis=dict(
                 tickfont=dict(size=13, color='white', family='Arial Black'),
@@ -507,19 +496,41 @@ elif st.session_state.page == "⚔️ Player VS":
                 
                 st.markdown("---")
                 
-                # Classic stats radar chart
+                # Classic stats radar chart with normalization
                 classic_stats = ['PTS', 'REB', 'AST', 'STL', 'BLK', 'MIN']
                 classic_values1 = []
                 classic_values2 = []
+                classic_values1_raw = []
+                classic_values2_raw = []
                 valid_classic_stats = []
                 
+                # First pass: collect raw values
                 for stat in classic_stats:
                     if stat in df_season.columns:
                         val1 = player1_stats[stat] if pd.notna(player1_stats[stat]) else 0
                         val2 = player2_stats[stat] if pd.notna(player2_stats[stat]) else 0
-                        classic_values1.append(float(val1))
-                        classic_values2.append(float(val2))
+                        classic_values1_raw.append(float(val1))
+                        classic_values2_raw.append(float(val2))
                         valid_classic_stats.append(stat)
+                
+                # Normalize each stat to 0-100 scale based on league context
+                # These are approximate max values for normalization
+                stat_max_values = {
+                    'PTS': 35,   # Elite scorer
+                    'REB': 15,   # Elite rebounder
+                    'AST': 12,   # Elite playmaker
+                    'STL': 2.5,  # Elite defender
+                    'BLK': 2.5,  # Elite shot blocker
+                    'MIN': 38    # Max minutes
+                }
+                
+                for i, stat in enumerate(valid_classic_stats):
+                    max_val = stat_max_values.get(stat, 1)
+                    # Normalize to 0-100 scale
+                    normalized_val1 = (classic_values1_raw[i] / max_val) * 100
+                    normalized_val2 = (classic_values2_raw[i] / max_val) * 100
+                    classic_values1.append(min(normalized_val1, 100))  # Cap at 100
+                    classic_values2.append(min(normalized_val2, 100))
                 
                 # Shooting efficiency radar chart
                 shooting_stats_map = {
@@ -567,12 +578,17 @@ elif st.session_state.page == "⚔️ Player VS":
                             classic_values1,
                             classic_values2,
                             valid_classic_stats,
-                            "📊 Classic Stats Comparison",
+                            "📊 Classic Stats Comparison (Normalized)",
                             player1,
                             player2,
-                            is_percentage=False
+                            is_percentage=False,
+                            raw_values1=classic_values1_raw,
+                            raw_values2=classic_values2_raw
                         )
                         st.plotly_chart(fig1, use_container_width=True)
+                        
+                        # Add explanation
+                        st.caption("📌 Stats are normalized to 0-100 scale for better comparison. Hover over the chart to see actual values.")
                     else:
                         st.warning("Classic stats not available")
                 
