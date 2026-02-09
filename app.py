@@ -170,31 +170,39 @@ def get_first_game_time():
         return first_time.strftime('%H:%M')
     return None
 
-def create_radar_chart(player1_data, player2_data, categories, title, player1_name, player2_name, is_percentage=False, raw_values1=None, raw_values2=None):
-    """Create a radar chart comparing two players with normalized scales"""
+def create_radar_chart(player1_data, player2_data, categories, title, player1_name, player2_name, is_percentage=False):
+    """Create a radar chart comparing two players"""
     
     fig = go.Figure()
     
-    # For normalized classic stats or percentages, use 0-100 scale
-    if is_percentage or raw_values1 is not None:
+    # Determine appropriate range based on data
+    if is_percentage:
+        # Fixed scale for percentages
         max_range = 100
         tick_vals = [0, 20, 40, 60, 80, 100]
+        suffix = '%'
     else:
-        # This shouldn't happen anymore, but keep as fallback
+        # Dynamic scale for stats
         all_values = player1_data + player2_data
         max_val = max(all_values) if all_values else 1
-        max_range = int((max_val / 10 + 1.5)) * 10
-        tick_vals = [i * max_range / 5 for i in range(6)]
-    
-    # Prepare hover templates
-    if raw_values1 is not None and raw_values2 is not None:
-        # For normalized stats, show both normalized and raw values
-        hover1 = [f"{cat}: {raw:.1f}" for cat, raw in zip(categories, raw_values1)]
-        hover2 = [f"{cat}: {raw:.1f}" for cat, raw in zip(categories, raw_values2)]
-    else:
-        # For percentages, just show the value
-        hover1 = [f"{cat}: {val:.1f}%" for cat, val in zip(categories, player1_data)]
-        hover2 = [f"{cat}: {val:.1f}%" for cat, val in zip(categories, player2_data)]
+        
+        # Calculate appropriate max range with some headroom
+        if max_val <= 3:
+            max_range = 3.5
+            tick_vals = [0, 0.7, 1.4, 2.1, 2.8, 3.5]
+        elif max_val <= 10:
+            max_range = 12
+            tick_vals = [0, 2, 4, 6, 8, 10, 12]
+        elif max_val <= 20:
+            max_range = 25
+            tick_vals = [0, 5, 10, 15, 20, 25]
+        elif max_val <= 30:
+            max_range = 35
+            tick_vals = [0, 7, 14, 21, 28, 35]
+        else:
+            max_range = int((max_val / 10 + 1.5)) * 10
+            tick_vals = [i * max_range / 5 for i in range(6)]
+        suffix = ''
     
     # Player 1
     fig.add_trace(go.Scatterpolar(
@@ -204,8 +212,7 @@ def create_radar_chart(player1_data, player2_data, categories, title, player1_na
         name=player1_name,
         line=dict(color=NBA_BLUE, width=3),
         fillcolor=f'rgba(29, 66, 138, 0.25)',
-        text=hover1,
-        hovertemplate='%{text}<extra></extra>'
+        hovertemplate='%{theta}: %{r:.1f}' + suffix + '<extra></extra>'
     ))
     
     # Player 2
@@ -216,8 +223,7 @@ def create_radar_chart(player1_data, player2_data, categories, title, player1_na
         name=player2_name,
         line=dict(color=NBA_RED, width=3),
         fillcolor=f'rgba(200, 16, 46, 0.25)',
-        text=hover2,
-        hovertemplate='%{text}<extra></extra>'
+        hovertemplate='%{theta}: %{r:.1f}' + suffix + '<extra></extra>'
     ))
     
     fig.update_layout(
@@ -228,8 +234,7 @@ def create_radar_chart(player1_data, player2_data, categories, title, player1_na
                 showticklabels=True,
                 tickfont=dict(size=11, color='#888'),
                 tickvals=tick_vals,
-                gridcolor='rgba(255, 255, 255, 0.2)',
-                ticksuffix='' if raw_values1 is not None else '%'
+                gridcolor='rgba(255, 255, 255, 0.2)'
             ),
             angularaxis=dict(
                 tickfont=dict(size=13, color='white', family='Arial Black'),
@@ -240,22 +245,22 @@ def create_radar_chart(player1_data, player2_data, categories, title, player1_na
         showlegend=True,
         title=dict(
             text=title,
-            font=dict(size=18, color=NBA_BLUE, family="Arial Black"),
+            font=dict(size=16, color=NBA_BLUE, family="Arial Black"),
             x=0.5,
             xanchor='center'
         ),
-        height=500,
+        height=450,
         legend=dict(
             orientation="h",
             yanchor="bottom",
-            y=-0.15,
+            y=-0.12,
             xanchor="center",
             x=0.5,
-            font=dict(size=13, family='Arial')
+            font=dict(size=12, family='Arial')
         ),
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
-        margin=dict(t=80, b=80, l=60, r=60)
+        margin=dict(t=70, b=60, l=50, r=50)
     )
     
     return fig
@@ -496,41 +501,34 @@ elif st.session_state.page == "⚔️ Player VS":
                 
                 st.markdown("---")
                 
-                # Classic stats radar chart with normalization
-                classic_stats = ['PTS', 'REB', 'AST', 'STL', 'BLK', 'MIN']
-                classic_values1 = []
-                classic_values2 = []
-                classic_values1_raw = []
-                classic_values2_raw = []
-                valid_classic_stats = []
+                # Classic stats - split into two categories for better readability
+                # Volume stats: PTS, REB, AST, MIN
+                volume_stats = ['PTS', 'REB', 'AST', 'MIN']
+                volume_values1 = []
+                volume_values2 = []
+                valid_volume_stats = []
                 
-                # First pass: collect raw values
-                for stat in classic_stats:
+                for stat in volume_stats:
                     if stat in df_season.columns:
                         val1 = player1_stats[stat] if pd.notna(player1_stats[stat]) else 0
                         val2 = player2_stats[stat] if pd.notna(player2_stats[stat]) else 0
-                        classic_values1_raw.append(float(val1))
-                        classic_values2_raw.append(float(val2))
-                        valid_classic_stats.append(stat)
+                        volume_values1.append(float(val1))
+                        volume_values2.append(float(val2))
+                        valid_volume_stats.append(stat)
                 
-                # Normalize each stat to 0-100 scale based on league context
-                # These are approximate max values for normalization
-                stat_max_values = {
-                    'PTS': 35,   # Elite scorer
-                    'REB': 15,   # Elite rebounder
-                    'AST': 12,   # Elite playmaker
-                    'STL': 2.5,  # Elite defender
-                    'BLK': 2.5,  # Elite shot blocker
-                    'MIN': 38    # Max minutes
-                }
+                # Defensive stats: STL, BLK (and potentially others)
+                defensive_stats = ['STL', 'BLK']
+                defensive_values1 = []
+                defensive_values2 = []
+                valid_defensive_stats = []
                 
-                for i, stat in enumerate(valid_classic_stats):
-                    max_val = stat_max_values.get(stat, 1)
-                    # Normalize to 0-100 scale
-                    normalized_val1 = (classic_values1_raw[i] / max_val) * 100
-                    normalized_val2 = (classic_values2_raw[i] / max_val) * 100
-                    classic_values1.append(min(normalized_val1, 100))  # Cap at 100
-                    classic_values2.append(min(normalized_val2, 100))
+                for stat in defensive_stats:
+                    if stat in df_season.columns:
+                        val1 = player1_stats[stat] if pd.notna(player1_stats[stat]) else 0
+                        val2 = player2_stats[stat] if pd.notna(player2_stats[stat]) else 0
+                        defensive_values1.append(float(val1))
+                        defensive_values2.append(float(val2))
+                        valid_defensive_stats.append(stat)
                 
                 # Shooting efficiency radar chart
                 shooting_stats_map = {
@@ -569,43 +567,60 @@ elif st.session_state.page == "⚔️ Player VS":
                         shooting_values2.append(0)
                         valid_shooting_stats.append(f"{display_name} (N/A)")
                 
-                # Display charts side by side
+                # Display charts in a grid layout
+                st.markdown("---")
+                
+                # Row 1: Volume Stats and Defensive Stats
                 col1, col2 = st.columns(2)
                 
                 with col1:
-                    if valid_classic_stats:
+                    if valid_volume_stats:
                         fig1 = create_radar_chart(
-                            classic_values1,
-                            classic_values2,
-                            valid_classic_stats,
-                            "📊 Classic Stats Comparison (Normalized)",
+                            volume_values1,
+                            volume_values2,
+                            valid_volume_stats,
+                            "📊 Volume Stats (PTS, REB, AST, MIN)",
                             player1,
                             player2,
-                            is_percentage=False,
-                            raw_values1=classic_values1_raw,
-                            raw_values2=classic_values2_raw
+                            is_percentage=False
                         )
                         st.plotly_chart(fig1, use_container_width=True)
-                        
-                        # Add explanation
-                        st.caption("📌 Stats are normalized to 0-100 scale for better comparison. Hover over the chart to see actual values.")
                     else:
-                        st.warning("Classic stats not available")
+                        st.warning("Volume stats not available")
                 
                 with col2:
+                    if valid_defensive_stats:
+                        fig2 = create_radar_chart(
+                            defensive_values1,
+                            defensive_values2,
+                            valid_defensive_stats,
+                            "🛡️ Defensive Stats (STL, BLK)",
+                            player1,
+                            player2,
+                            is_percentage=False
+                        )
+                        st.plotly_chart(fig2, use_container_width=True)
+                    else:
+                        st.warning("Defensive stats not available")
+                
+                # Row 2: Shooting Efficiency (centered)
+                st.markdown("---")
+                col_left, col_center, col_right = st.columns([1, 2, 1])
+                
+                with col_center:
                     if valid_shooting_stats:
                         # Remove "(N/A)" entries if all are N/A
                         if not all("(N/A)" in stat for stat in valid_shooting_stats):
-                            fig2 = create_radar_chart(
+                            fig3 = create_radar_chart(
                                 shooting_values1,
                                 shooting_values2,
                                 valid_shooting_stats,
-                                "🎯 Shooting Efficiency Comparison",
+                                "🎯 Shooting Efficiency (FG%, FG3%, FT%)",
                                 player1,
                                 player2,
                                 is_percentage=True
                             )
-                            st.plotly_chart(fig2, use_container_width=True)
+                            st.plotly_chart(fig3, use_container_width=True)
                         else:
                             st.warning("No shooting efficiency stats available")
                     else:
@@ -615,11 +630,14 @@ elif st.session_state.page == "⚔️ Player VS":
                 st.markdown("---")
                 st.subheader("📋 Detailed Comparison")
                 
-                comparison_stats = valid_classic_stats + valid_shooting_stats
+                all_stats = valid_volume_stats + valid_defensive_stats + valid_shooting_stats
+                all_values1 = volume_values1 + defensive_values1 + shooting_values1
+                all_values2 = volume_values2 + defensive_values2 + shooting_values2
+                
                 comparison_data = {
-                    'Stat': comparison_stats,
-                    player1: [classic_values1 + shooting_values1][0][:len(comparison_stats)],
-                    player2: [classic_values2 + shooting_values2][0][:len(comparison_stats)]
+                    'Stat': all_stats,
+                    player1: all_values1,
+                    player2: all_values2
                 }
                 
                 df_comparison = pd.DataFrame(comparison_data)
