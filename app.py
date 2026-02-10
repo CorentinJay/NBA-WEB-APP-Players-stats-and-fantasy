@@ -502,8 +502,8 @@ elif st.session_state.page == "⚔️ Player VS":
                 st.markdown("---")
                 
                 # Classic stats - split into two categories for better readability
-                # Volume stats: PTS, REB, AST, MIN
-                volume_stats = ['PTS', 'REB', 'AST', 'MIN']
+                # Volume stats: PTS, OREB, AST, MIN
+                volume_stats = ['PTS', 'OREB', 'AST', 'MIN']
                 volume_values1 = []
                 volume_values2 = []
                 valid_volume_stats = []
@@ -516,8 +516,8 @@ elif st.session_state.page == "⚔️ Player VS":
                         volume_values2.append(float(val2))
                         valid_volume_stats.append(stat)
                 
-                # Defensive stats: STL, BLK (and potentially others)
-                defensive_stats = ['STL', 'BLK']
+                # Defensive stats: STL, BLK, DREB
+                defensive_stats = ['STL', 'BLK', 'DREB']
                 defensive_values1 = []
                 defensive_values2 = []
                 valid_defensive_stats = []
