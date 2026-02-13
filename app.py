@@ -164,8 +164,8 @@ def get_today_games():
         today_games = today_games.sort_values('Heure_paris')
         
         return today_games
-    except Exception as e:  # ← CORRECTION ICI
-        st.error(f"❌ Error loading schedule: {str(e)}")  # ← ET ICI
+    except Exception as e:
+        st.error(f"❌ Error loading schedule: {str(e)}")
         return pd.DataFrame()
 
 def get_first_game_time():
