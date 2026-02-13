@@ -280,6 +280,15 @@ if st.session_state.page == "🏠 Home":
     current_time = get_french_time()
     st.markdown(f"### 📅 {current_time.strftime('%A, %B %d, %Y')}")
     
+    # ALL STAR BREAK CHECK
+    from datetime import date
+    today = current_time.date()
+    all_star_start = date(2026, 2, 13)
+    all_star_end = date(2026, 2, 18)
+    
+    if all_star_start <= today <= all_star_end:
+        st.info("🌟 ALL STAR GAME IN LOS ANGELES. Next game on Feb 19th.")
+    
     st.markdown("---")
     st.markdown("### 🏀 Today's Games")
     
