@@ -16,6 +16,10 @@ NBA_BLUE = "#1D428A"
 NBA_RED = "#C8102E"
 NBA_WHITE = "#FFFFFF"
 
+# ALL-STAR BREAK dates
+ALL_STAR_START = date(2026, 2, 13)
+ALL_STAR_END = date(2026, 2, 18)
+
 st.markdown(f"""
     <style>
         [data-testid="stSidebar"] {{
@@ -132,6 +136,15 @@ def format_game_display(row):
 
 def get_today_games():
     try:
+        # ALL STAR BREAK CHECK - moved to the beginning
+        from datetime import date
+        # ALL STAR BREAK CHECK
+        paris_tz = pytz.timezone('Europe/Paris')
+        today = datetime.now(paris_tz).date()
+        
+        if ALL_STAR_START <= today <= ALL_STAR_END:
+            return pd.DataFrame()
+        
         df_schedule = pd.read_parquet('season_schedule.parquet')
         df_schedule['Date'] = pd.to_datetime(df_schedule['Date'], format='mixed', dayfirst=True)
         
@@ -158,7 +171,6 @@ def get_today_games():
         today_games = df_schedule[df_schedule['Date'].dt.date == today_paris].copy()
         
         if today_games.empty:
-            st.info("🏀 No games for today...")
             return pd.DataFrame()
         
         today_games = today_games.sort_values('Heure_paris')
@@ -280,19 +292,13 @@ if st.session_state.page == "🏠 Home":
     current_time = get_french_time()
     st.markdown(f"### 📅 {current_time.strftime('%A, %B %d, %Y')}")
     
-    # ALL STAR BREAK CHECK
-    from datetime import date
-    today = current_time.date()
-    all_star_start = date(2026, 2, 13)
-    all_star_end = date(2026, 2, 18)
-    
-    if all_star_start <= today <= all_star_end:
-        st.info("🌟 ALL STAR GAME IN LOS ANGELES. Next game on Feb 19th.")
-    
     st.markdown("---")
     st.markdown("### 🏀 Today's Games")
     
-    today_games = get_today_games()
+    if ALL_STAR_START <= current_time.date() <= ALL_STAR_END:
+        st.info("🌟 ALL STAR GAME IN LOS ANGELES. Next game on Feb 19th.")
+    else:
+        today_games = get_today_games()
     
     if not today_games.empty:
         for _, game in today_games.iterrows():
