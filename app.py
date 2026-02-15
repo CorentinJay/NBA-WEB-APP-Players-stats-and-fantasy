@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, date, timedelta
 import pytz
 import plotly.graph_objects as go
 import numpy as np
@@ -12,6 +12,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Constantes NBA
 NBA_BLUE = "#1D428A"
 NBA_RED = "#C8102E"
 NBA_WHITE = "#FFFFFF"
@@ -136,14 +137,12 @@ def format_game_display(row):
 
 def get_today_games():
     try:
-        # ALL STAR BREAK CHECK - moved to the beginning
-        from datetime import date
-        # ALL STAR BREAK CHECK
+        # ALL STAR BREAK CHECK - stop immédiatement si on est pendant le break
         paris_tz = pytz.timezone('Europe/Paris')
         today = datetime.now(paris_tz).date()
         
         if ALL_STAR_START <= today <= ALL_STAR_END:
-            return pd.DataFrame()
+            return pd.DataFrame()  # Retour DataFrame vide
         
         df_schedule = pd.read_parquet('season_schedule.parquet')
         df_schedule['Date'] = pd.to_datetime(df_schedule['Date'], format='mixed', dayfirst=True)
@@ -295,18 +294,20 @@ if st.session_state.page == "🏠 Home":
     st.markdown("---")
     st.markdown("### 🏀 Today's Games")
     
+    # Check All-Star break AVANT d'appeler get_today_games()
     if ALL_STAR_START <= current_time.date() <= ALL_STAR_END:
-        st.info("🌟 ALL STAR GAME IN LOS ANGELES. Next game on Feb 19th.")
+        next_game_date = ALL_STAR_END + timedelta(days=1)
+        st.info(f"🌟 ALL STAR GAME IN LOS ANGELES. Next game on {next_game_date.strftime('%b %d')}.")
     else:
         today_games = get_today_games()
-    
-    if not today_games.empty:
-        for _, game in today_games.iterrows():
-            game_display = format_game_display(game)
-            st.markdown(f"<div style='background-color: {NBA_WHITE}; border: 1px solid {NBA_BLUE}; border-radius: 5px; padding: 8px; margin: 5px 0; text-align: center;'><p style='color: {NBA_BLUE}; margin: 0; font-size: 14px;'>{game_display}</p></div>", 
-                       unsafe_allow_html=True)
-    else:
-        st.info("No games scheduled for today")
+        
+        if not today_games.empty:
+            for _, game in today_games.iterrows():
+                game_display = format_game_display(game)
+                st.markdown(f"<div style='background-color: {NBA_WHITE}; border: 1px solid {NBA_BLUE}; border-radius: 5px; padding: 8px; margin: 5px 0; text-align: center;'><p style='color: {NBA_BLUE}; margin: 0; font-size: 14px;'>{game_display}</p></div>", 
+                           unsafe_allow_html=True)
+        else:
+            st.info("No games scheduled for today")
     
     st.markdown("---")
     st.markdown("### 📊 Season Leaders")
