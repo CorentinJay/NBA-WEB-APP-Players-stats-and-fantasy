@@ -118,6 +118,44 @@ with st.sidebar:
     st.markdown(f"<p style='color: {NBA_WHITE}; text-align: center;'><b>Created by Corentin Jay</b></p>", unsafe_allow_html=True)
     st.markdown(f"<p style='color: {NBA_WHITE}; text-align: center;'><a href='https://github.com/CorentinJay' style='color: {NBA_WHITE};'>GitHub</a></p>", unsafe_allow_html=True)
 
+
+# ─────────────────────────────────────────────
+# DATA LOADING FUNCTIONS — toutes avec TTL 1h
+# ─────────────────────────────────────────────
+
+@st.cache_data(ttl=3600)
+def load_season_schedule():
+    return pd.read_parquet('season_schedule.parquet')
+
+@st.cache_data(ttl=3600)
+def load_player_season():
+    return pd.read_parquet('player_season.parquet')
+
+@st.cache_data(ttl=3600)
+def load_player_trend():
+    return pd.read_parquet('player_trend.parquet')
+
+@st.cache_data(ttl=3600)
+def load_player_career():
+    return pd.read_parquet('player_career.parquet')
+
+@st.cache_data(ttl=3600)
+def load_player_info():
+    return pd.read_parquet('player_info.parquet')
+
+@st.cache_data(ttl=3600)
+def load_injury_list():
+    return pd.read_parquet('injury_list.parquet')
+
+@st.cache_data(ttl=3600)
+def load_fantasy_predictions():
+    return pd.read_parquet('fantasy_daily_predictions.parquet')
+
+
+# ─────────────────────────────────────────────
+# HELPER FUNCTIONS
+# ─────────────────────────────────────────────
+
 def get_french_time():
     paris_tz = pytz.timezone('Europe/Paris')
     return datetime.now(paris_tz)
@@ -137,14 +175,13 @@ def format_game_display(row):
 
 def get_today_games():
     try:
-        # ALL STAR BREAK CHECK - stop immédiatement si on est pendant le break
         paris_tz = pytz.timezone('Europe/Paris')
         today = datetime.now(paris_tz).date()
         
         if ALL_STAR_START <= today <= ALL_STAR_END:
-            return pd.DataFrame()  # Retour DataFrame vide
+            return pd.DataFrame()
         
-        df_schedule = pd.read_parquet('season_schedule.parquet')
+        df_schedule = load_season_schedule()
         df_schedule['Date'] = pd.to_datetime(df_schedule['Date'], format='mixed', dayfirst=True)
         
         def parse_et_time(statut, date):
@@ -187,22 +224,16 @@ def get_first_game_time():
     return None
 
 def create_radar_chart(player1_data, player2_data, categories, title, player1_name, player2_name, is_percentage=False):
-    """Create a radar chart comparing two players"""
-    
     fig = go.Figure()
     
-    # Determine appropriate range based on data
     if is_percentage:
-        # Fixed scale for percentages
         max_range = 100
         tick_vals = [0, 20, 40, 60, 80, 100]
         suffix = '%'
     else:
-        # Dynamic scale for stats
         all_values = player1_data + player2_data
         max_val = max(all_values) if all_values else 1
         
-        # Calculate appropriate max range with some headroom
         if max_val <= 3:
             max_range = 3.5
             tick_vals = [0, 0.7, 1.4, 2.1, 2.8, 3.5]
@@ -220,7 +251,6 @@ def create_radar_chart(player1_data, player2_data, categories, title, player1_na
             tick_vals = [i * max_range / 5 for i in range(6)]
         suffix = ''
     
-    # Player 1
     fig.add_trace(go.Scatterpolar(
         r=player1_data,
         theta=categories,
@@ -231,7 +261,6 @@ def create_radar_chart(player1_data, player2_data, categories, title, player1_na
         hovertemplate='%{theta}: %{r:.1f}' + suffix + '<extra></extra>'
     ))
     
-    # Player 2
     fig.add_trace(go.Scatterpolar(
         r=player2_data,
         theta=categories,
@@ -281,9 +310,10 @@ def create_radar_chart(player1_data, player2_data, categories, title, player1_na
     
     return fig
 
-def normalize_percentage(value, max_val=100):
-    """Normalize percentage values for radar chart"""
-    return min(value, max_val)
+
+# ─────────────────────────────────────────────
+# PAGES
+# ─────────────────────────────────────────────
 
 if st.session_state.page == "🏠 Home":
     st.title("🏀 NBA Stats Fantasy")
@@ -294,7 +324,6 @@ if st.session_state.page == "🏠 Home":
     st.markdown("---")
     st.markdown("### 🏀 Today's Games")
     
-    # Check All-Star break AVANT d'appeler get_today_games()
     if ALL_STAR_START <= current_time.date() <= ALL_STAR_END:
         next_game_date = ALL_STAR_END + timedelta(days=1)
         st.info(f"🌟 ALL STAR GAME IN LOS ANGELES. Next game on {next_game_date.strftime('%b %d')}.")
@@ -313,7 +342,7 @@ if st.session_state.page == "🏠 Home":
     st.markdown("### 📊 Season Leaders")
     
     try:
-        df_season = pd.read_parquet('player_season.parquet')
+        df_season = load_player_season()
         
         stats = {
             'PTS': '🏀 Points',
@@ -371,7 +400,7 @@ elif st.session_state.page == "👤 Players":
         st.subheader("📊 Season Statistics")
         
         try:
-            df_season = pd.read_parquet('player_season.parquet')
+            df_season = load_player_season()
             
             filter_cols = [col for col in df_season.columns if 'PLAYER' in col.upper() or 'TEAM' in col.upper()]
             
@@ -398,7 +427,7 @@ elif st.session_state.page == "👤 Players":
         st.subheader("📈 Player Trends")
         
         try:
-            df_trend = pd.read_parquet('player_trend.parquet')
+            df_trend = load_player_trend()
             
             filter_cols = [col for col in df_trend.columns if 'PLAYER' in col.upper() or 'TEAM' in col.upper()]
             
@@ -428,7 +457,7 @@ elif st.session_state.page == "👤 Players":
         st.subheader("📈 Career Statistics")
         
         try:
-            df_career = pd.read_parquet('player_career.parquet')
+            df_career = load_player_career()
             
             filter_cols = [col for col in df_career.columns if 'PLAYER' in col.upper() or 'TEAM' in col.upper()]
             
@@ -459,7 +488,7 @@ elif st.session_state.page == "👤 Players":
         st.subheader("ℹ️ Player Information")
         
         try:
-            df_info = pd.read_parquet('player_info.parquet')
+            df_info = load_player_info()
             
             filter_cols = [col for col in df_info.columns if 'PLAYER' in col.upper() or 'TEAM' in col.upper()]
             
@@ -490,9 +519,8 @@ elif st.session_state.page == "⚔️ Player VS":
     st.title("⚔️ Player Comparison")
     
     try:
-        df_season = pd.read_parquet('player_season.parquet')
+        df_season = load_player_season()
         
-        # Get player list
         player_col = None
         for col in df_season.columns:
             if 'PLAYER' in col.upper() and 'ID' not in col.upper():
@@ -504,7 +532,6 @@ elif st.session_state.page == "⚔️ Player VS":
         else:
             players_list = sorted(df_season[player_col].dropna().unique().tolist())
             
-            # Player selection
             col1, col2 = st.columns(2)
             
             with col1:
@@ -516,14 +543,11 @@ elif st.session_state.page == "⚔️ Player VS":
                 player2 = st.selectbox("Select Player 2", players_list, key="player2", label_visibility="collapsed")
             
             if player1 and player2:
-                # Get player data
                 player1_stats = df_season[df_season[player_col] == player1].iloc[0]
                 player2_stats = df_season[df_season[player_col] == player2].iloc[0]
                 
                 st.markdown("---")
                 
-                # Classic stats - split into two categories for better readability
-                # Volume stats: PTS, OREB, AST, MIN
                 volume_stats = ['PTS', 'OREB', 'AST', 'MIN']
                 volume_values1 = []
                 volume_values2 = []
@@ -537,7 +561,6 @@ elif st.session_state.page == "⚔️ Player VS":
                         volume_values2.append(float(val2))
                         valid_volume_stats.append(stat)
                 
-                # Defensive stats: STL, BLK, DREB
                 defensive_stats = ['STL', 'BLK', 'DREB']
                 defensive_values1 = []
                 defensive_values2 = []
@@ -551,14 +574,6 @@ elif st.session_state.page == "⚔️ Player VS":
                         defensive_values2.append(float(val2))
                         valid_defensive_stats.append(stat)
                 
-                # Shooting efficiency radar chart
-                shooting_stats_map = {
-                    'FG%': 'FG%',
-                    'FG3%': 'FG3%', 
-                    '3P%': 'FG3%',  # Alternative name
-                    'FT%': 'FT%'
-                }
-                
                 shooting_values1 = []
                 shooting_values2 = []
                 valid_shooting_stats = []
@@ -570,7 +585,6 @@ elif st.session_state.page == "⚔️ Player VS":
                             val1 = player1_stats[stat_name] if pd.notna(player1_stats[stat_name]) else 0
                             val2 = player2_stats[stat_name] if pd.notna(player2_stats[stat_name]) else 0
                             
-                            # Convert to percentage if needed (value between 0-1)
                             if val1 > 0 and val1 <= 1:
                                 val1 *= 100
                             if val2 > 0 and val2 <= 1:
@@ -583,12 +597,10 @@ elif st.session_state.page == "⚔️ Player VS":
                             break
                     
                     if not found:
-                        # Add 0 values for missing stats to keep chart balanced
                         shooting_values1.append(0)
                         shooting_values2.append(0)
                         valid_shooting_stats.append(f"{display_name} (N/A)")
                 
-                # Display all three charts in one row
                 st.markdown("---")
                 
                 col1, col2, col3 = st.columns(3)
@@ -596,13 +608,8 @@ elif st.session_state.page == "⚔️ Player VS":
                 with col1:
                     if valid_volume_stats:
                         fig1 = create_radar_chart(
-                            volume_values1,
-                            volume_values2,
-                            valid_volume_stats,
-                            "📊 Volume Stats",
-                            player1,
-                            player2,
-                            is_percentage=False
+                            volume_values1, volume_values2, valid_volume_stats,
+                            "📊 Volume Stats", player1, player2, is_percentage=False
                         )
                         st.plotly_chart(fig1, use_container_width=True)
                     else:
@@ -611,13 +618,8 @@ elif st.session_state.page == "⚔️ Player VS":
                 with col2:
                     if valid_defensive_stats:
                         fig2 = create_radar_chart(
-                            defensive_values1,
-                            defensive_values2,
-                            valid_defensive_stats,
-                            "🛡️ Defensive Stats",
-                            player1,
-                            player2,
-                            is_percentage=False
+                            defensive_values1, defensive_values2, valid_defensive_stats,
+                            "🛡️ Defensive Stats", player1, player2, is_percentage=False
                         )
                         st.plotly_chart(fig2, use_container_width=True)
                     else:
@@ -625,16 +627,10 @@ elif st.session_state.page == "⚔️ Player VS":
                 
                 with col3:
                     if valid_shooting_stats:
-                        # Remove "(N/A)" entries if all are N/A
                         if not all("(N/A)" in stat for stat in valid_shooting_stats):
                             fig3 = create_radar_chart(
-                                shooting_values1,
-                                shooting_values2,
-                                valid_shooting_stats,
-                                "🎯 Shooting Efficiency",
-                                player1,
-                                player2,
-                                is_percentage=True
+                                shooting_values1, shooting_values2, valid_shooting_stats,
+                                "🎯 Shooting Efficiency", player1, player2, is_percentage=True
                             )
                             st.plotly_chart(fig3, use_container_width=True)
                         else:
@@ -642,7 +638,6 @@ elif st.session_state.page == "⚔️ Player VS":
                     else:
                         st.warning("Shooting stats not available")
                 
-                # Detailed comparison table
                 st.markdown("---")
                 st.subheader("📋 Detailed Comparison")
                 
@@ -657,8 +652,6 @@ elif st.session_state.page == "⚔️ Player VS":
                 }
                 
                 df_comparison = pd.DataFrame(comparison_data)
-                
-                # Add difference column
                 df_comparison['Difference'] = df_comparison[player2] - df_comparison[player1]
                 df_comparison['Winner'] = df_comparison.apply(
                     lambda row: player1 if row[player1] > row[player2] else (player2 if row[player2] > row[player1] else 'Equal'),
@@ -674,7 +667,7 @@ elif st.session_state.page == "🏥 Injuries":
     st.title("🏥 Injury List")
     
     try:
-        df = pd.read_parquet('injury_list.parquet')
+        df = load_injury_list()
         
         filter_cols = [col for col in df.columns if 'PLAYER' in col.upper() or 'TEAM' in col.upper()]
         
@@ -708,7 +701,7 @@ elif st.session_state.page == "🔮 Fantasy Predictions":
         st.markdown(f"### ⏰ Deadline: {first_game_time} (first game of the day)")
     
     try:
-        df = pd.read_parquet('fantasy_daily_predictions.parquet')
+        df = load_fantasy_predictions()
         
         filter_cols = [col for col in df.columns if 'PLAYER' in col.upper() or 'TEAM' in col.upper()]
         
