@@ -166,10 +166,11 @@ def format_game_display(row):
     arena = row['Arena']
     
     if 'Heure_paris' in row.index:
-        time_str = row['Heure_paris'].strftime('%H:%M')
+        heure = row['Heure_paris']
+        time_str = heure.strftime('%H:%M') if pd.notna(heure) else 'TBD'
     else:
         time_obj = pd.to_datetime(row['Heure'])
-        time_str = time_obj.strftime('%H:%M')
+        time_str = time_obj.strftime('%H:%M') if pd.notna(time_obj) else 'TBD'
     
     return f"{time_str} - {away_team} @ {home_team} - {arena}"
 
