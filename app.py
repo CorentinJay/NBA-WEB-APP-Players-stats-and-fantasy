@@ -221,7 +221,8 @@ def get_first_game_time():
     today_games = get_today_games()
     if not today_games.empty and 'Heure_paris' in today_games.columns:
         first_time = today_games.iloc[0]['Heure_paris']
-        return first_time.strftime('%H:%M')
+        if pd.notna(first_time):
+            return first_time.strftime('%H:%M')
     return None
 
 def create_radar_chart(player1_data, player2_data, categories, title, player1_name, player2_name, is_percentage=False):
