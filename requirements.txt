@@ -3,3 +3,4 @@ pandas>=2.0.0
 plotly>=5.17.0
 pyarrow>=14.0.0
 numpy>=1.24.0
+pytz>=2023.3
