@@ -187,9 +187,6 @@ def get_today_games():
             df_schedule['Date'] = pd.to_datetime(df_schedule['Date'], format='mixed', dayfirst=True)
         else:
             df_schedule['Date'] = pd.to_datetime(df_schedule['Date'])
-
-        st.write(df_schedule['Date'].dtype)
-        st.write(df_schedule['Date'].head(5))
         
         def parse_et_time(statut, date):
             try:
