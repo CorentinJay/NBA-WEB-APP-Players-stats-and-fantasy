@@ -183,11 +183,12 @@ def get_today_games():
             return pd.DataFrame()
         
         df_schedule = load_season_schedule()
-        df_schedule['Date'] = pd.to_datetime(df_schedule['Date'], format='mixed', dayfirst=True)
+        df_schedule['Date'] = pd.to_datetime(df_schedule['Date'], dayfirst=True)
+        st.write(df_schedule['Date'].unique()[:10])
         
         def parse_et_time(statut, date):
             try:
-                time_str = statut.replace(' ET', '').strip()
+                time_str = statut.replace(' ET', '').strip().upper()
                 dt_str = f"{date.strftime('%Y-%m-%d')} {time_str}"
                 dt_et = pd.to_datetime(dt_str, format='%Y-%m-%d %I:%M %p')
                 eastern_tz = pytz.timezone('US/Eastern')
