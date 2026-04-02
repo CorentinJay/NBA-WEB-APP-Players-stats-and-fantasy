@@ -183,8 +183,16 @@ def get_today_games():
             return pd.DataFrame()
         
         df_schedule = load_season_schedule()
-        df_schedule['Date'] = pd.to_datetime(df_schedule['Date'], dayfirst=True)
-        st.write(df_schedule['Date'].unique()[:10])
+        # df_schedule['Date'] = pd.to_datetime(df_schedule['Date'], format='mixed', dayfirst=True)
+        def safe_parse_date(d):
+            for fmt in ['%d/%m/%Y', '%m/%d/%Y', '%Y-%m-%d']:
+                try:
+                    return pd.to_datetime(d, format=fmt)
+                except:
+                    continue
+            return pd.NaT
+
+        df_schedule['Date'] = df_schedule['Date'].apply(safe_parse_date)
         
         def parse_et_time(statut, date):
             try:
