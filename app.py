@@ -360,7 +360,7 @@ if st.session_state.page == "🏠 Home":
         cols = st.columns(5)
     
         # Filtre minimum 58 matchs joués
-        df_qualified = df_season[df_season['GP'] >= 58] if 'GP' in df_season.columns else df_season
+        df_qualified = df_season[df_season['GP'] >= 58] if 'GAMES PLAYED' in df_season.columns else df_season
         
         for idx, (stat_col, stat_title) in enumerate(stats.items()):
             with cols[idx]:
