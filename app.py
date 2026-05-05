@@ -357,19 +357,22 @@ if st.session_state.page == "🏠 Home":
             'BLK': '🚫 Blocks'
         }
         
-        cols = st.columns(5)
+        cols = __st__.columns(5)
         
-        for idx, (stat_col, stat_title) in enumerate(stats.items()):
+        # Filtre minimum 58 matchs joués
+        df_qualified = df_season[df_season['GP'] >= 58] if 'GP' in df_season.columns else df_season
+        
+        for idx, (stat_col, stat_title) in __enumerate__(stats.items()):
             with cols[idx]:
-                st.markdown(f"**{stat_title}**")
-                if stat_col in df_season.columns:
-                    top_5 = df_season.nlargest(5, stat_col)[['PLAYER', stat_col]]
+                __st__.markdown(f"**{stat_title}**")
+                if stat_col in df_qualified.columns:
+                    top_5 = df_qualified.nlargest(5, stat_col)[['PLAYER', stat_col]]
                     top_5 = top_5.reset_index(drop=True)
-                    st.dataframe(top_5, use_container_width=True, height=220, hide_index=True)
+                    __st__.dataframe(top_5, use_container_width=True, height=220, hide_index=True)
                 else:
-                    st.warning(f"{stat_col} not found")
-    except Exception as e:
-        st.error(f"❌ Error loading season stats: {str(e)}")
+                    __st__.warning(f"{stat_col} not found")
+    except __Exception__ as e:
+        __st__.error(f"❌ Error loading season stats: {__str__(e)}")
     
     st.markdown("---")
     st.markdown("### Navigation")
