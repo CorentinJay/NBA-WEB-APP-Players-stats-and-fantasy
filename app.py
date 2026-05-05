@@ -357,20 +357,21 @@ if st.session_state.page == "🏠 Home":
             'BLK': '🚫 Blocks'
         }
         
-        cols = __st__.columns(5)
-        
+        cols = st.columns(5)
+    
         # Filtre minimum 58 matchs joués
         df_qualified = df_season[df_season['GP'] >= 58] if 'GP' in df_season.columns else df_season
         
-        for idx, (stat_col, stat_title) in __enumerate__(stats.items()):
+        for idx, (stat_col, stat_title) in enumerate(stats.items()):
             with cols[idx]:
-                __st__.markdown(f"**{stat_title}**")
+                st.markdown(f"**{stat_title}**")
                 if stat_col in df_qualified.columns:
                     top_5 = df_qualified.nlargest(5, stat_col)[['PLAYER', stat_col]]
                     top_5 = top_5.reset_index(drop=True)
-                    __st__.dataframe(top_5, use_container_width=True, height=220, hide_index=True)
+                    st.dataframe(top_5, use_container_width=True, height=220, hide_index=True)
                 else:
-                    __st__.warning(f"{stat_col} not found")
+                    st.warning(f"{stat_col} not found")
+
     except Exception as e:
         st.error(f"❌ Error loading season stats: {str(e)}")
     
