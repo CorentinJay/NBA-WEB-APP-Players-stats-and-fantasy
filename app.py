@@ -371,8 +371,8 @@ if st.session_state.page == "🏠 Home":
                     __st__.dataframe(top_5, use_container_width=True, height=220, hide_index=True)
                 else:
                     __st__.warning(f"{stat_col} not found")
-    except __Exception__ as e:
-        __st__.error(f"❌ Error loading season stats: {__str__(e)}")
+    except Exception as e:
+        st.error(f"❌ Error loading season stats: {str(e)}")
     
     st.markdown("---")
     st.markdown("### Navigation")
