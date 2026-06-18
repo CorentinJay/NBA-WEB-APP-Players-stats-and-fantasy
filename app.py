@@ -330,7 +330,19 @@ elif st.session_state.page == "👤 Players":
     with tab_info:
         st.subheader("ℹ️ Player Information")
         try:
-            render_dataframe_with_filters(load_player_info(), key_prefix="info")
+            df_info = load_player_info()
+            # Format datetime columns to date only (YYYY-MM-DD)
+            for col in df_info.columns:
+                if pd.api.types.is_datetime64_any_dtype(df_info[col]):
+                    df_info[col] = df_info[col].dt.strftime("%Y-%m-%d")
+                elif df_info[col].dtype == object:
+                    try:
+                        parsed = pd.to_datetime(df_info[col], errors="coerce")
+                        if parsed.notna().sum() > len(df_info) * 0.5:
+                            df_info[col] = parsed.dt.strftime("%Y-%m-%d").where(parsed.notna(), df_info[col])
+                    except Exception:
+                        pass
+            render_dataframe_with_filters(df_info, key_prefix="info")
         except Exception as e:
             st.error(f"❌ Error loading player info: {e}")
         st.markdown("---")
@@ -341,7 +353,7 @@ elif st.session_state.page == "👤 Players":
 # ─────────────────────────────────────────────
 
 elif st.session_state.page == "⚔️ Player VS":
-    st.title("⚔️ Player Comparison")
+    st.title("⚔️ Player Comparison (regular season)")
 
     try:
         df_season = load_reg_season()
@@ -404,7 +416,7 @@ elif st.session_state.page == "⚔️ Player VS":
             off_labels = oreb_labels + pct_labels
 
             # Graph 3 — Defensive stats
-            def1, def2, def_labels = extract_stats(["DREB", "STL", "BLK", "PF"])
+            def1, def2, def_labels = extract_stats(["STL", "BLK", "PF"])
 
             st.markdown("---")
             c1, c2, c3 = st.columns(3)
