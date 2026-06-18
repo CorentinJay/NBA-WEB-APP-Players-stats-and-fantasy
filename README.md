@@ -24,7 +24,7 @@ Provides daily predictions for fantasy basketball:
 #### 2. Data Engineering
 - Data cleaning
 - Data engineering (rolling and specific stats)
-- Unit tests and checks
+- Unit tests and data drift
 
 #### 3. Modeling
 - Training on historical data, predicting on today's games for both fantasy calculation methods
@@ -48,10 +48,10 @@ NBA_stats_fantasy/
 ├── app.py                                # Dashboard code
 ├── fantasy_daily_predictions.parquet     # Daily fantasy predictions
 ├── injury_list.parquet                   # Injured players
-├── player_career.parquet                 # Career players stats
-├── player_info.parquet                   # Players personal info
-├── player_season.parquet                 # Season players stats
-├── player_trend.parquet                  # Season players recent trends
+├── stats_clean_career.parquet            # Career players stats
+├── players_info.parquet                  # Players personal informations
+├── stats_clean_reg_season.parquet        # Regular season players stats
+├── stats_clean_post_season.parquet       # Post season players stats
 ├── season_schedule.parquet               # Season schedule
 ├── .streamlit/config.toml                # Configuration
 └── requirements.txt                      # Dependencies
