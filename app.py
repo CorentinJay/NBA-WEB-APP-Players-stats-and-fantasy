@@ -409,14 +409,10 @@ elif st.session_state.page == "⚔️ Player VS":
                 ("FG3 PCT", ["FG3 PCT", "FG3%", "3P%"]),
                 ("eFG PCT", ["eFG PCT", "EFG%", "eFG%"]),
             ]
-            oreb1, oreb2, oreb_labels = extract_stats(["OREB"])
-            pct1,  pct2,  pct_labels  = extract_pct_stats(off_pct_mapping)
-            off1   = oreb1 + pct1
-            off2   = oreb2 + pct2
-            off_labels = oreb_labels + pct_labels
+            off1, off2, off_labels = extract_pct_stats(off_pct_mapping)
 
             # Graph 3 — Defensive stats
-            def1, def2, def_labels = extract_stats(["STL", "BLK", "PF"])
+            def1, def2, def_labels = extract_stats(["DREB", "STL", "BLK", "PF"])
 
             st.markdown("---")
             c1, c2, c3 = st.columns(3)
