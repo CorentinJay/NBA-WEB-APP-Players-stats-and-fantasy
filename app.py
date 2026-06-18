@@ -364,6 +364,7 @@ elif st.session_state.page == "⚔️ Player VS":
             p2 = df_season[df_season[player_col] == player2].iloc[0]
 
             def extract_stats(stat_names):
+                """Extract raw counting stats (no scaling needed)."""
                 vals1, vals2, labels = [], [], []
                 for stat in stat_names:
                     if stat in df_season.columns:
@@ -372,9 +373,9 @@ elif st.session_state.page == "⚔️ Player VS":
                         labels.append(stat)
                 return vals1, vals2, labels
 
-            def extract_shooting():
+            def extract_pct_stats(mapping):
+                """Extract percentage stats, converting 0-1 values to 0-100."""
                 vals1, vals2, labels = [], [], []
-                mapping = [("FG%", ["FG%"]), ("FG3%", ["FG3%", "3P%"]), ("FT%", ["FT%"])]
                 for display, candidates in mapping:
                     for candidate in candidates:
                         if candidate in df_season.columns:
@@ -386,16 +387,31 @@ elif st.session_state.page == "⚔️ Player VS":
                             break
                 return vals1, vals2, labels
 
-            vol1,  vol2,  vol_labels  = extract_stats(["PTS", "OREB", "AST", "MIN"])
-            def1,  def2,  def_labels  = extract_stats(["STL", "BLK", "DREB"])
-            sht1,  sht2,  sht_labels  = extract_shooting()
+            # Graph 1 — Global stats
+            glb1, glb2, glb_labels = extract_stats(["PTS", "REB", "AST"])
+
+            # Graph 2 — Offensive stats (mix of counting + percentages)
+            off_pct_mapping = [
+                ("FT PCT",  ["FT PCT",  "FT%"]),
+                ("FG PCT",  ["FG PCT",  "FG%"]),
+                ("FG3 PCT", ["FG3 PCT", "FG3%", "3P%"]),
+                ("eFG PCT", ["eFG PCT", "EFG%", "eFG%"]),
+            ]
+            oreb1, oreb2, oreb_labels = extract_stats(["OREB"])
+            pct1,  pct2,  pct_labels  = extract_pct_stats(off_pct_mapping)
+            off1   = oreb1 + pct1
+            off2   = oreb2 + pct2
+            off_labels = oreb_labels + pct_labels
+
+            # Graph 3 — Defensive stats
+            def1, def2, def_labels = extract_stats(["DREB", "STL", "BLK", "PF"])
 
             st.markdown("---")
             c1, c2, c3 = st.columns(3)
             charts = [
-                (c1, vol1,  vol2,  vol_labels,  "📊 Volume Stats",       False),
-                (c2, def1,  def2,  def_labels,  "🛡️ Defensive Stats",    False),
-                (c3, sht1,  sht2,  sht_labels,  "🎯 Shooting Efficiency", True),
+                (c1, glb1, glb2, glb_labels, "🌐 Global Stats",      False),
+                (c2, off1, off2, off_labels, "⚔️ Offensive Stats",   True),
+                (c3, def1, def2, def_labels, "🛡️ Defensive Stats",   False),
             ]
             for col, v1, v2, labels, title, pct in charts:
                 with col:
@@ -407,9 +423,9 @@ elif st.session_state.page == "⚔️ Player VS":
             st.markdown("---")
             st.subheader("📋 Detailed Comparison")
 
-            all_labels = vol_labels + def_labels + sht_labels
-            all_v1     = vol1 + def1 + sht1
-            all_v2     = vol2 + def2 + sht2
+            all_labels = glb_labels + off_labels + def_labels
+            all_v1     = glb1 + off1 + def1
+            all_v2     = glb2 + off2 + def2
 
             df_cmp = pd.DataFrame({"Stat": all_labels, player1: all_v1, player2: all_v2})
             df_cmp["Difference"] = df_cmp[player2] - df_cmp[player1]
