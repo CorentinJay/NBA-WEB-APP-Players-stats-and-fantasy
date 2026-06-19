@@ -153,10 +153,12 @@ def reg_season_qualify(df: pd.DataFrame) -> pd.DataFrame:
     threshold = df["GP"].max() * 0.72
     return df[df["GP"] >= threshold]
 
-def render_season_leaders(df: pd.DataFrame, qualify: bool = False):
+def render_season_leaders(df: pd.DataFrame, qualify: bool = False, min_total_min: int = None):
     """Display top-5 leaders for PTS / REB / AST / STL / BLK."""
     STATS = {"PTS": "🏀 Points", "REB": "🔄 Rebounds", "AST": "🎯 Assists", "STL": "🖐️ Steals", "BLK": "🚫 Blocks"}
     source = reg_season_qualify(df) if qualify else df
+    if min_total_min is not None and "TOTAL_MIN" in source.columns:
+        source = source[source["TOTAL_MIN"] >= min_total_min]
     player_col = next((c for c in df.columns if "PLAYER" in c.upper() and "ID" not in c.upper()), None)
     cols = st.columns(5)
     for idx, (stat, label) in enumerate(STATS.items()):
@@ -265,7 +267,7 @@ if st.session_state.page == "🏠 Home":
         if df_post.empty:
             st.info("🕐 Post season has not started yet.")
         else:
-            render_season_leaders(df_post, qualify=False)
+            render_season_leaders(df_post, qualify=False, min_total_min=150)
     except Exception as e:
         st.error(f"❌ Error loading post season stats: {e}")
 
