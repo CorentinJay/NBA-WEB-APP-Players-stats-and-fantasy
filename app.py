@@ -157,8 +157,8 @@ def render_season_leaders(df: pd.DataFrame, qualify: bool = False, min_total_min
     """Display top-5 leaders for PTS / REB / AST / STL / BLK."""
     STATS = {"PTS": "🏀 Points", "REB": "🔄 Rebounds", "AST": "🎯 Assists", "STL": "🖐️ Steals", "BLK": "🚫 Blocks"}
     source = reg_season_qualify(df) if qualify else df
-    if min_total_min is not None and "TOTAL_MIN" in source.columns:
-        source = source[source["TOTAL_MIN"] >= min_total_min]
+    if min_total_min is not None and "TOTAL MIN" in source.columns:
+        source = source[source["TOTAL MIN"] >= min_total_min]
     player_col = next((c for c in df.columns if "PLAYER" in c.upper() and "ID" not in c.upper()), None)
     cols = st.columns(5)
     for idx, (stat, label) in enumerate(STATS.items()):
