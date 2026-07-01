@@ -121,8 +121,18 @@ def get_today_games() -> pd.DataFrame:
         return pd.DataFrame()
     try:
         df = load_season_schedule()
-        df["Date"] = pd.to_datetime(df["Date"], format="mixed", dayfirst=True)
-        df["Heure_paris"] = df.apply(lambda r: parse_et_to_paris(r["Statut"], r["Date"].date()), axis=1)
+
+        # Normalise la colonne Date sans ambiguïté de format
+        df["Date"] = pd.to_datetime(df["Date"], dayfirst=False, utc=False, errors="coerce")
+        
+        # Retire la timezone si présente pour éviter les décalages
+        if df["Date"].dt.tz is not None:
+            df["Date"] = df["Date"].dt.tz_localize(None)
+
+        df["Heure_paris"] = df.apply(
+            lambda r: parse_et_to_paris(r["Statut"], r["Date"].date()), axis=1
+        )
+
         today_games = df[df["Date"].dt.date == today].copy()
         return today_games.sort_values("Heure_paris")
     except Exception as e:
