@@ -19,8 +19,8 @@ NBA_BLUE  = "#1D428A"
 NBA_RED   = "#C8102E"
 NBA_WHITE = "#FFFFFF"
 
-ALL_STAR_START = date(2026, 2, 13)
-ALL_STAR_END   = date(2026, 2, 18)
+ALL_STAR_START = date(2027, 2, 19)
+ALL_STAR_END   = date(2027, 2, 21)
 
 PAGES = ["🏠 Home", "👤 Players", "⚔️ Player VS", "🏥 Injuries", "🔮 Fantasy Predictions"]
 
