@@ -381,7 +381,7 @@ if st.session_state.page == "🏠 Home":
     # ── Regular season leaders ──
     st.markdown("### 📊 Regular Season Leaders")
     try:
-        render_season_leaders(load_reg_season(), qualify=True)
+        render_season_leaders(load_reg_season(), qualify=False)
     except Exception as e:
         st.error(f"❌ Error loading regular season stats: {e}")
 
@@ -394,7 +394,7 @@ if st.session_state.page == "🏠 Home":
         if df_post.empty:
             st.info("🕐 Post season has not started yet.")
         else:
-            render_season_leaders(df_post, qualify=False, min_total_min=1)
+            render_season_leaders(df_post, qualify=False, min_total_min=150)
     except Exception as e:
         st.error(f"❌ Error loading post season stats: {e}")
 
