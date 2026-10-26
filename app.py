@@ -1,4 +1,7 @@
+import base64
 import os
+from pathlib import Path
+
 import streamlit as st
 import pandas as pd
 from datetime import datetime, date, timedelta
@@ -26,12 +29,53 @@ ALL_STAR_END   = date(2027, 2, 21)
 PAGES = ["🏠 Home", "👤 Players", "⚔️ Player VS", "🏟️ Team Stats", "🏥 Injuries", "🔮 Fantasy Predictions"]
 
 # ─────────────────────────────────────────────
+# IMAGES
+# ─────────────────────────────────────────────
+
+APP_DIR = Path(__file__).parent
+MIME_TYPES = {".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png",
+              ".webp": "image/webp", ".avif": "image/avif"}
+
+@st.cache_data
+def _encode_image(path: str, mtime: float) -> str:
+    """Cached per file version (mtime): replacing an image refreshes it without restarting."""
+    p = Path(path)
+    mime = MIME_TYPES.get(p.suffix.lower(), "image/jpeg")
+    return f"data:{mime};base64,{base64.b64encode(p.read_bytes()).decode()}"
+
+def image_data_uri(filename: str) -> str | None:
+    """Embed a local image as a base64 data URI (CSS cannot read local files directly)."""
+    path = APP_DIR / filename
+    if not path.exists():
+        return None
+    return _encode_image(str(path), path.stat().st_mtime)
+
+SIDEBAR_IMG = image_data_uri("ban_left.jpg")
+HOME_HEADER_IMG = image_data_uri("head_home.avif")
+
+# Sidebar: image + blue overlay to keep the white text readable (plain blue if image missing)
+SIDEBAR_BG = (
+    f"background-image: linear-gradient(rgba(29, 66, 138, 0.80), rgba(29, 66, 138, 0.80)), url('{SIDEBAR_IMG}');"
+    " background-size: cover; background-position: center;"
+    if SIDEBAR_IMG else ""
+)
+
+# ─────────────────────────────────────────────
 # STYLING
 # ─────────────────────────────────────────────
 
 st.markdown(f"""
 <style>
-    [data-testid="stSidebar"] {{ background-color: {NBA_BLUE}; }}
+    [data-testid="stSidebar"] {{ background-color: {NBA_BLUE}; {SIDEBAR_BG} }}
+    .home-header {{
+        background-color: {NBA_BLUE};
+        background-size: cover; background-position: center;
+        border-radius: 12px; padding: 48px 32px; margin-bottom: 8px;
+    }}
+    .home-header h1 {{ color: {NBA_WHITE} !important; margin: 0; padding: 0; font-size: 2.8rem;
+                       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6); }}
+    .home-header p  {{ color: {NBA_WHITE}; margin: 8px 0 0 0; font-size: 1.25rem; font-weight: 600;
+                       text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6); }}
     [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p {{ color: {NBA_WHITE}; }}
     .stRadio > label {{ color: {NBA_WHITE} !important; font-weight: bold; }}
     h1 {{ color: {NBA_BLUE}; }}
@@ -299,9 +343,19 @@ def create_radar_chart(
 # ─────────────────────────────────────────────
 
 if st.session_state.page == "🏠 Home":
-    st.title("🏀 NBA Stats Fantasy")
     now = get_paris_now()
-    st.markdown(f"### 📅 {now.strftime('%A, %B %d, %Y')}")
+    # Header banner: image + dark overlay for readability (plain blue if image missing)
+    header_bg = (
+        f"background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('{HOME_HEADER_IMG}');"
+        if HOME_HEADER_IMG else ""
+    )
+    st.markdown(
+        f"<div class='home-header' style=\"{header_bg}\">"
+        f"<h1>🏀 NBA Stats Fantasy</h1>"
+        f"<p>📅 {now.strftime('%A, %B %d, %Y')}</p>"
+        f"</div>",
+        unsafe_allow_html=True
+    )
     st.markdown("---")
 
     # ── Today's games ──
