@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import pandas as pd
 from datetime import datetime, date, timedelta
@@ -22,7 +23,7 @@ NBA_WHITE = "#FFFFFF"
 ALL_STAR_START = date(2027, 2, 19)
 ALL_STAR_END   = date(2027, 2, 21)
 
-PAGES = ["🏠 Home", "👤 Players", "⚔️ Player VS", "🏥 Injuries", "🔮 Fantasy Predictions"]
+PAGES = ["🏠 Home", "👤 Players", "⚔️ Player VS", "🏟️ Team Stats", "🏥 Injuries", "🔮 Fantasy Predictions"]
 
 # ─────────────────────────────────────────────
 # STYLING
@@ -98,6 +99,15 @@ def load_player_info()        : return load_parquet("players_info.parquet")
 def load_season_schedule()    : return load_parquet("season_schedule.parquet")
 def load_injury_list()        : return load_parquet("injury_list.parquet")
 def load_fantasy_predictions(): return load_parquet("fantasy_daily_predictions.parquet")
+def load_team_reg_season()    : return load_parquet("stats_team_reg_season.parquet")
+
+TEAM_POST_SEASON_FILE = "stats_team_post_season.parquet"
+
+def load_team_post_season() -> pd.DataFrame:
+    """Empty DataFrame when the post season file does not exist yet."""
+    if not os.path.exists(TEAM_POST_SEASON_FILE):
+        return pd.DataFrame()
+    return load_parquet(TEAM_POST_SEASON_FILE)
 
 # ─────────────────────────────────────────────
 # HELPERS
@@ -179,6 +189,59 @@ def render_season_leaders(df: pd.DataFrame, qualify: bool = False, min_total_min
                 st.dataframe(top5, use_container_width=True, height=220, hide_index=True)
             else:
                 st.warning(f"{stat} not found")
+
+def render_team_leaders(df: pd.DataFrame):
+    """Display top-5 teams for PTS / OPP_PTS / FG_PCT / REB / BLK."""
+    # (column, label, ascending) — OPP_PTS: fewer points allowed is better
+    STATS = [
+        ("PTS",     "🏀 Points",            False),
+        ("OPP_PTS", "🛡️ Fewest Pts Allowed", True),
+        ("FG_PCT",  "🎯 FG %",              False),
+        ("REB",     "🔄 Rebounds",          False),
+        ("BLK",     "🚫 Blocks",            False),
+    ]
+    team_col = "TEAM_NAME" if "TEAM_NAME" in df.columns else next(
+        (c for c in df.columns if "TEAM" in c.upper()), None)
+    cols = st.columns(len(STATS))
+    for idx, (stat, label, ascending) in enumerate(STATS):
+        with cols[idx]:
+            st.markdown(f"**{label}**")
+            if stat in df.columns and team_col:
+                top5 = (df.sort_values(stat, ascending=ascending)
+                          .head(5)[[team_col, stat]]
+                          .reset_index(drop=True))
+                if stat.endswith("_PCT"):
+                    top5[stat] = (top5[stat] * 100).round(1)
+                    top5 = top5.rename(columns={stat: stat.replace("_PCT", " %")})
+                st.dataframe(top5, use_container_width=True, height=220, hide_index=True)
+            else:
+                st.warning(f"{stat} not found")
+
+def find_col(df: pd.DataFrame, *keywords, exclude=()):
+    """First column whose name contains all keywords (case-insensitive)."""
+    for c in df.columns:
+        name = c.upper()
+        if all(k.upper() in name for k in keywords) and not any(e.upper() in name for e in exclude):
+            return c
+    return None
+
+def render_best_picks(df: pd.DataFrame):
+    """Top-5 TTFL and top-5 SORARE predictions side by side."""
+    player_col = find_col(df, "PLAYER", exclude=("ID",))
+    team_col = find_col(df, "TEAM", exclude=("ID",))
+    cols = st.columns(2)
+    for col, game, label in [(cols[0], "TTFL", "🏆 Top 5 TTFL"), (cols[1], "SORARE", "⭐ Top 5 SORARE")]:
+        with col:
+            st.markdown(f"**{label}**")
+            # Prediction column: e.g. TTFL_predict; fallback on any column containing the game name
+            pred_col = find_col(df, game, "PRED") or find_col(df, game, exclude=("L10", "ROLLING", "MEAN"))
+            if pred_col is None or player_col is None:
+                st.warning(f"{game} predictions not found")
+                continue
+            show = [c for c in (player_col, team_col, pred_col) if c]
+            top5 = df.nlargest(5, pred_col)[show].reset_index(drop=True)
+            top5[pred_col] = top5[pred_col].round(1)
+            st.dataframe(top5, use_container_width=True, height=220, hide_index=True)
 
 def create_radar_chart(
     values1, values2, categories, title,
@@ -283,14 +346,37 @@ if st.session_state.page == "🏠 Home":
 
     st.markdown("---")
 
+    # ── Team leaders ──
+    st.markdown("### 🏟️ Team Leaders (regular season)")
+    try:
+        render_team_leaders(load_team_reg_season())
+    except Exception as e:
+        st.error(f"❌ Error loading team stats: {e}")
+
+    st.markdown("---")
+
+    # ── Today's best picks ──
+    st.markdown("### 🔮 Today's Best Picks")
+    try:
+        df_pred = load_fantasy_predictions()
+        if df_pred.empty:
+            st.info("No predictions available for today.")
+        else:
+            render_best_picks(df_pred)
+    except Exception as e:
+        st.error(f"❌ Error loading fantasy predictions: {e}")
+
+    st.markdown("---")
+
     # ── Navigation shortcuts ──
     st.markdown("### Navigation")
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4, col5 = st.columns(5)
     shortcuts = [
         (col1, "👤 Players",            "Player statistics and info"),
         (col2, "⚔️ Player VS",          "Compare two players"),
-        (col3, "🏥 Injuries",           "Injury reports"),
-        (col4, "🔮 Fantasy Predictions","Fantasy predictions"),
+        (col3, "🏟️ Team Stats",         "Team statistics"),
+        (col4, "🏥 Injuries",           "Injury reports"),
+        (col5, "🔮 Fantasy Predictions","Fantasy predictions"),
     ]
     for col, target, subtitle in shortcuts:
         with col:
@@ -457,6 +543,34 @@ elif st.session_state.page == "⚔️ Player VS":
 
     except Exception as e:
         st.error(f"❌ Error loading player data: {e}")
+
+# ─────────────────────────────────────────────
+# PAGE — TEAM STATS
+# ─────────────────────────────────────────────
+
+elif st.session_state.page == "🏟️ Team Stats":
+    st.title("🏟️ Team Statistics")
+
+    st.subheader("📊 Regular Season Statistics")
+    try:
+        # 30 teams: tall enough to show every row without scrolling
+        render_dataframe_with_filters(load_team_reg_season(), key_prefix="team_reg", height=1100)
+    except Exception as e:
+        st.error(f"❌ Error loading regular season team stats: {e}")
+
+    st.markdown("---")
+    st.subheader("🏆 Post Season Statistics")
+    try:
+        df_team_post = load_team_post_season()
+        if df_team_post.empty:
+            st.info("🕐 Post season has not started yet.")
+        else:
+            render_dataframe_with_filters(df_team_post, key_prefix="team_post", height=600)
+    except Exception as e:
+        st.error(f"❌ Error loading post season team stats: {e}")
+
+    st.markdown("---")
+    st.caption("📊 **Data Source:** NBA Official Stats API | Per-game averages, percentages from season totals | Updated daily")
 
 # ─────────────────────────────────────────────
 # PAGE — INJURIES
