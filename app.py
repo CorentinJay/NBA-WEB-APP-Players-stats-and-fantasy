@@ -347,7 +347,7 @@ if st.session_state.page == "🏠 Home":
     st.markdown("---")
 
     # ── Team leaders ──
-    st.markdown("### 🏟️ Team Leaders (regular season)")
+    st.markdown("### 🏟️ Team Leaders (regular season, per game)")
     try:
         render_team_leaders(load_team_reg_season())
     except Exception as e:
@@ -356,7 +356,14 @@ if st.session_state.page == "🏠 Home":
     st.markdown("---")
 
     # ── Today's best picks ──
-    st.markdown("### 🔮 Today's Best Picks")
+    # Deadline = first game of the day (Paris time)
+    deadline = ""
+    games_today = get_today_games()
+    if not games_today.empty and "Heure_paris" in games_today.columns:
+        first_time = games_today["Heure_paris"].dropna().min()
+        if pd.notna(first_time):
+            deadline = f" (deadline {first_time.strftime('%H:%M')})"
+    st.markdown(f"### 🔮 Today's Best Picks{deadline}")
     try:
         df_pred = load_fantasy_predictions()
         if df_pred.empty:
@@ -372,15 +379,15 @@ if st.session_state.page == "🏠 Home":
     st.markdown("### Navigation")
     col1, col2, col3, col4, col5 = st.columns(5)
     shortcuts = [
-        (col1, "👤 Players",            "Player statistics and info"),
-        (col2, "⚔️ Player VS",          "Compare two players"),
-        (col3, "🏟️ Team Stats",         "Team statistics"),
-        (col4, "🏥 Injuries",           "Injury reports"),
-        (col5, "🔮 Fantasy Predictions","Fantasy predictions"),
+        (col1, "👤 Players",            "Season, career and player info"),
+        (col2, "⚔️ Player VS",          "Compare two players side by side"),
+        (col3, "🏟️ Team Stats",         "Regular season and post season team stats"),
+        (col4, "🏥 Injuries",           "Latest injury report"),
+        (col5, "🔮 Fantasy Predictions","Today's TTFL and Sorare predictions"),
     ]
     for col, target, subtitle in shortcuts:
         with col:
-            if st.button(f"{target}\n\n{subtitle}", use_container_width=True):
+            if st.button(target, help=subtitle, use_container_width=True):
                 st.session_state.page = target
                 st.rerun()
 
