@@ -1,0 +1,1269 @@
+{
+  "version": "2026-11-06",
+  "questions": [
+    {
+      "id": "q-001",
+      "type": "vrai_faux",
+      "difficulte": 2,
+      "question": "Vrai ou faux, le Orlando Magic a failli s’appeler l’Orlando Heat ?",
+      "bonne_reponse": "Vrai",
+      "mauvaises_reponses": [
+        "Faux"
+      ]
+    },
+    {
+      "id": "q-002",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Dans quelle salle les Knicks évoluent-ils à domicile ?",
+      "bonne_reponse": "Madison Square Garden",
+      "mauvaises_reponses": [
+        "The Capital One Arena",
+        "United Center",
+        "Crypto.com Arena"
+      ]
+    },
+    {
+      "id": "q-003",
+      "type": "vrai_faux",
+      "difficulte": 1,
+      "question": "Vrai ou faux, avant de s’appeler les Nuggets, la franchise de Denver aurait dû s’appeler les Chicken Wings.",
+      "bonne_reponse": "Faux",
+      "mauvaises_reponses": [
+        "Vrai"
+      ]
+    },
+    {
+      "id": "q-004",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Avec quelle franchise Dennis Johnson a-t-il été MVP des Finales ?",
+      "bonne_reponse": "Seattle Supersonics",
+      "mauvaises_reponses": [
+        "Vancouver Grizzlies",
+        "Los Angeles Lakers",
+        "Detroit Pistons"
+      ]
+    },
+    {
+      "id": "q-005",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Pour quelle franchise jouez-vous si vous traînez du côté de South Beach ?",
+      "bonne_reponse": "Miami Heat",
+      "mauvaises_reponses": [
+        "Los Angeles Lakers",
+        "Golden State Warriors",
+        "Orlando Magic"
+      ]
+    },
+    {
+      "id": "q-006",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Avant d’y retourner en 2018, combien de saisons consécutives sans Playoffs les Minnesota Timberwolves ont-ils vécu ?",
+      "bonne_reponse": "13",
+      "mauvaises_reponses": [
+        "7",
+        "10",
+        "16"
+      ]
+    },
+    {
+      "id": "q-007",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Comment s’appelle la salle dans laquelle jouent les Brooklyn Nets ?",
+      "bonne_reponse": "Barclays Center",
+      "mauvaises_reponses": [
+        "Toyota Center",
+        "Madison Square Garden",
+        "Wells Fargo Center"
+      ]
+    },
+    {
+      "id": "q-008",
+      "type": "vrai_faux",
+      "difficulte": 2,
+      "question": "Vrai ou faux, Hakeem Olajuwon a fait toute sa carrière dans une seule franchise.",
+      "bonne_reponse": "Faux",
+      "mauvaises_reponses": [
+        "Vrai"
+      ]
+    },
+    {
+      "id": "q-009",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Avec quelle franchise Cedric Maxwell a-t-il été MVP des Finales ?",
+      "bonne_reponse": "Boston Celtics",
+      "mauvaises_reponses": [
+        "Detroit Pistons",
+        "Chicago Bulls",
+        "San Antonio Spurs"
+      ]
+    },
+    {
+      "id": "q-010",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Dans quelle ville les Bucks jouent-ils ?",
+      "bonne_reponse": "Milwaukee",
+      "mauvaises_reponses": [
+        "Toronto",
+        "Chicago",
+        "Orlando"
+      ]
+    },
+    {
+      "id": "q-011",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quel est l’ancien nom des Kings de Sacramento ?",
+      "bonne_reponse": "Royals",
+      "mauvaises_reponses": [
+        "Queens",
+        "Cobras",
+        "Emperors"
+      ]
+    },
+    {
+      "id": "q-012",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Laquelle de ces équipes n’a pas été championne dans les 90’s ?",
+      "bonne_reponse": "Portland Trail Blazers",
+      "mauvaises_reponses": [
+        "Houston Rockets",
+        "Chicago Bulls",
+        "San Antonio Spurs"
+      ]
+    },
+    {
+      "id": "q-013",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Laquelle de ces équipes n’a pas été championne dans les 2000’s ?",
+      "bonne_reponse": "Houston Rockets",
+      "mauvaises_reponses": [
+        "Miami Heat",
+        "Detroit Pistons",
+        "Boston Celtics"
+      ]
+    },
+    {
+      "id": "q-014",
+      "type": "vrai_faux",
+      "difficulte": 1,
+      "question": "Vrai ou faux, Michael Jordan n’a joué que pour une seule franchise durant sa carrière.",
+      "bonne_reponse": "Faux",
+      "mauvaises_reponses": [
+        "Vrai"
+      ]
+    },
+    {
+      "id": "q-015",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Pour combien de franchises différentes James Harden a-t-il joué ?",
+      "bonne_reponse": "6",
+      "mauvaises_reponses": [
+        "4",
+        "5",
+        "7"
+      ]
+    },
+    {
+      "id": "q-016",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "En quelle année les Seattle Supersonics ont-ils disparu ?",
+      "bonne_reponse": "2008",
+      "mauvaises_reponses": [
+        "2004",
+        "2006",
+        "2010"
+      ]
+    },
+    {
+      "id": "q-017",
+      "type": "vrai_faux",
+      "difficulte": 1,
+      "question": "Vrai ou faux, Il y a une franchise qui s’appelait les « Saint-Louis Bombers ».",
+      "bonne_reponse": "Vrai",
+      "mauvaises_reponses": [
+        "Faux"
+      ]
+    },
+    {
+      "id": "q-018",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Sur quelle chanson les Bulls des 90’s étaient-ils présentés au United Center ?",
+      "bonne_reponse": "« Sirius », The Alan Parsons Project",
+      "mauvaises_reponses": [
+        "« Roundball Rock », John Tesh",
+        "« On the run », Pink Floyd",
+        "« Eminence Front », The Who"
+      ]
+    },
+    {
+      "id": "q-019",
+      "type": "vrai_faux",
+      "difficulte": 1,
+      "question": "Vrai ou faux, Il y a eu une franchise à Baltimore.",
+      "bonne_reponse": "Vrai",
+      "mauvaises_reponses": [
+        "Faux"
+      ]
+    },
+    {
+      "id": "q-020",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Quelle équipe est championne en 2006 après avoir été menée 0-2 ?",
+      "bonne_reponse": "Miami Heat",
+      "mauvaises_reponses": [
+        "San Antonio Spurs",
+        "Los Angeles Lakers",
+        "Boston Celtics"
+      ]
+    },
+    {
+      "id": "q-021",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Laquelle de ces franchises est la seule à n’avoir jamais eu de mascotte ?",
+      "bonne_reponse": "Los Angeles Lakers",
+      "mauvaises_reponses": [
+        "Miami Heat",
+        "Boston Celtics",
+        "Detroit Pistons"
+      ]
+    },
+    {
+      "id": "q-022",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Entre 2002 et 2013, dans quelle ville jouaient les Hornets ?",
+      "bonne_reponse": "La Nouvelle-Orléans",
+      "mauvaises_reponses": [
+        "Jacksonville",
+        "Tampa",
+        "Nashville"
+      ]
+    },
+    {
+      "id": "q-023",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "En 2001, les Lakers n’ont perdu qu’un seul match de playoffs avant d’être champions, contre qui ?",
+      "bonne_reponse": "Philadelphia 76ers",
+      "mauvaises_reponses": [
+        "San Antonio Spurs",
+        "Boston Celtics",
+        "Miami Heat"
+      ]
+    },
+    {
+      "id": "q-024",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Dans laquelle de ces équipes Shaquille O’Neal n’a pas joué ?",
+      "bonne_reponse": "Detroit Pistons",
+      "mauvaises_reponses": [
+        "Boston Celtics",
+        "Cleveland Cavaliers",
+        "Phoenix Suns"
+      ]
+    },
+    {
+      "id": "q-025",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Quelles équipes se sont affrontées pour le tout premier match NBA ?",
+      "bonne_reponse": "Toronto Huskies VS New York Knicks",
+      "mauvaises_reponses": [
+        "New Orleans Hornets VS Cleveland Cavaliers",
+        "Vancouver Grizzlies VS Boston Celtics",
+        "Seattle Supersonics VS Los Angeles Lakers"
+      ]
+    },
+    {
+      "id": "q-026",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Dans quelle franchise Allen Iverson a-t-il fini sa carrière ?",
+      "bonne_reponse": "Philadelphia 76ers",
+      "mauvaises_reponses": [
+        "Los Angeles Lakers",
+        "Toronto Raptors",
+        "Miami Heat"
+      ]
+    },
+    {
+      "id": "q-027",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Quelle est la seule équipe à avoir remporté le titre après avoir été menée 3-1 en Finales ?",
+      "bonne_reponse": "Cleveland Cavaliers",
+      "mauvaises_reponses": [
+        "Golden State Warriors",
+        "Miami Heat",
+        "Toronto Raptors"
+      ]
+    },
+    {
+      "id": "q-028",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Laquelle de ces équipes ne fait pas partie de la division Pacifique ?",
+      "bonne_reponse": "Utah Jazz",
+      "mauvaises_reponses": [
+        "Phoenix Suns",
+        "Los Angeles Clippers",
+        "Golden State Warriors"
+      ]
+    },
+    {
+      "id": "q-029",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Quelle ville a perdu sa franchise au profit d’Oklahoma City ?",
+      "bonne_reponse": "Seattle",
+      "mauvaises_reponses": [
+        "Vancouver",
+        "Baltimore",
+        "Salt Lake City"
+      ]
+    },
+    {
+      "id": "q-030",
+      "type": "vrai_faux",
+      "difficulte": 1,
+      "question": "Vrai ou faux, le surnom de l’équipe de Portland a déjà été les « Portland Jail Blazers ».",
+      "bonne_reponse": "Vrai",
+      "mauvaises_reponses": [
+        "Faux"
+      ]
+    },
+    {
+      "id": "q-031",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quelle franchise a sélectionné Rudy Gobert lors de sa draft en 2013 ?",
+      "bonne_reponse": "Denver Nuggets",
+      "mauvaises_reponses": [
+        "Cleveland Cavaliers",
+        "Utah Jazz",
+        "Minnesota Timberwolves"
+      ]
+    },
+    {
+      "id": "q-032",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Laquelle de ces franchises n’a jamais remporté un titre NBA ?",
+      "bonne_reponse": "Phoenix Suns",
+      "mauvaises_reponses": [
+        "Portland Trail Blazers",
+        "Detroit Pistons",
+        "Baltimore Bullets"
+      ]
+    },
+    {
+      "id": "q-033",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Combien de fois les Hawks ont-ils été champions NBA ?",
+      "bonne_reponse": "1",
+      "mauvaises_reponses": [
+        "0",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "id": "q-034",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quelle équipe est championne en 2010 ?",
+      "bonne_reponse": "Los Angeles Lakers",
+      "mauvaises_reponses": [
+        "San Antonio Spurs",
+        "Boston Celtics",
+        "Golden State Warriors"
+      ]
+    },
+    {
+      "id": "q-035",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Laquelle de ces équipes ne fait pas partie de la division Nord-Ouest ?",
+      "bonne_reponse": "Sacramento Kings",
+      "mauvaises_reponses": [
+        "Oklahoma City Thunder",
+        "Minnesota Timberwolves",
+        "Portland Trail Blazers"
+      ]
+    },
+    {
+      "id": "q-036",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "En quelle année James Harden a-t-il été drafté ?",
+      "bonne_reponse": "2009",
+      "mauvaises_reponses": [
+        "2008",
+        "2010",
+        "2011"
+      ]
+    },
+    {
+      "id": "q-037",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "En quelle année LeBron James a-t-il été drafté ?",
+      "bonne_reponse": "2003",
+      "mauvaises_reponses": [
+        "2001",
+        "2002",
+        "2004"
+      ]
+    },
+    {
+      "id": "q-038",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Lequel de ces joueurs n’est pas de la même cuvée de draft que James Harden (draft 2009) ?",
+      "bonne_reponse": "John Wall",
+      "mauvaises_reponses": [
+        "Blake Griffin",
+        "Stephen Curry",
+        "Jrue Holiday"
+      ]
+    },
+    {
+      "id": "q-039",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Laquelle de ces équipes ne fait pas partie de la division Sud-Est ?",
+      "bonne_reponse": "Memphis Grizzlies",
+      "mauvaises_reponses": [
+        "Atlanta Hawks",
+        "Washington Wizards",
+        "Charlotte Hornets"
+      ]
+    },
+    {
+      "id": "q-040",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Laquelle de ces équipes n’a pas été championne dans les 70’s ?",
+      "bonne_reponse": "Philadelphia 76ers",
+      "mauvaises_reponses": [
+        "Seattle Supersonics",
+        "New York Knicks",
+        "Boston Celtics"
+      ]
+    },
+    {
+      "id": "q-041",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Laquelle de ces équipes a été championne en 2014 après avoir été traumatisée l’année précédente ?",
+      "bonne_reponse": "San Antonio Spurs",
+      "mauvaises_reponses": [
+        "Miami Heat",
+        "Golden State Warriors",
+        "Cleveland Cavaliers"
+      ]
+    },
+    {
+      "id": "q-042",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "En quelle année les Warriors ont-ils déménagé en Californie ?",
+      "bonne_reponse": "1962",
+      "mauvaises_reponses": [
+        "1972",
+        "1968",
+        "1965"
+      ]
+    },
+    {
+      "id": "q-043",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Laquelle de ces équipes ne fait pas partie de la division Atlantique ?",
+      "bonne_reponse": "Milwaukee Bucks",
+      "mauvaises_reponses": [
+        "Philadelphia 76ers",
+        "Boston Celtics",
+        "New York Knicks"
+      ]
+    },
+    {
+      "id": "q-044",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Par laquelle de ces villes la franchise des Kings n’est-elle pas passée avant Sacramento ?",
+      "bonne_reponse": "San Jose",
+      "mauvaises_reponses": [
+        "Rochester",
+        "Cincinnati",
+        "Kansas City"
+      ]
+    },
+    {
+      "id": "q-045",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Laquelle de ces équipes a été championne en 2008 ?",
+      "bonne_reponse": "Boston Celtics",
+      "mauvaises_reponses": [
+        "Miami Heat",
+        "Golden State Warriors",
+        "Los Angeles Lakers"
+      ]
+    },
+    {
+      "id": "q-046",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quelle franchise a drafté Nicolas Batum en 2008 ?",
+      "bonne_reponse": "Houston Rockets",
+      "mauvaises_reponses": [
+        "Los Angeles Clippers",
+        "Portland Trail Blazers",
+        "Charlotte Hornets"
+      ]
+    },
+    {
+      "id": "q-047",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Laquelle de ces équipes n’a pas été championne dans les 80’s ?",
+      "bonne_reponse": "Seattle SuperSonics",
+      "mauvaises_reponses": [
+        "Philadelphia 76ers",
+        "Detroit Pistons",
+        "Boston Celtics"
+      ]
+    },
+    {
+      "id": "q-048",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Quelle équipe est championne en 2020 ?",
+      "bonne_reponse": "Los Angeles Lakers",
+      "mauvaises_reponses": [
+        "Golden State Warriors",
+        "Toronto Raptors",
+        "Boston Celtics"
+      ]
+    },
+    {
+      "id": "q-049",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Quelle équipe est championne en 2021 ?",
+      "bonne_reponse": "Milwaukee Bucks",
+      "mauvaises_reponses": [
+        "Golden State Warriors",
+        "Los Angeles Lakers",
+        "Boston Celtics"
+      ]
+    },
+    {
+      "id": "q-050",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Quelle équipe est championne en 2022 ?",
+      "bonne_reponse": "Golden State Warriors",
+      "mauvaises_reponses": [
+        "Boston Celtics",
+        "Los Angeles Lakers",
+        "Denver Nuggets"
+      ]
+    },
+    {
+      "id": "q-051",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Quelle équipe est championne en 2023 ?",
+      "bonne_reponse": "Denver Nuggets",
+      "mauvaises_reponses": [
+        "Boston Celtics",
+        "Oklahoma City Thunder",
+        "Golden State Warriors"
+      ]
+    },
+    {
+      "id": "q-052",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Quelle équipe est championne en 2024 ?",
+      "bonne_reponse": "Boston Celtics",
+      "mauvaises_reponses": [
+        "Denver Nuggets",
+        "Oklahoma City Thunder",
+        "Golden State Warriors"
+      ]
+    },
+    {
+      "id": "q-053",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Quelle équipe est championne en 2025 ?",
+      "bonne_reponse": "Oklahoma City Thunder",
+      "mauvaises_reponses": [
+        "New York Knicks",
+        "Boston Celtics",
+        "Golden State Warriors"
+      ]
+    },
+    {
+      "id": "q-054",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Quelle équipe est championne en 2026 ?",
+      "bonne_reponse": "New York Knicks",
+      "mauvaises_reponses": [
+        "San Antonio Spurs",
+        "Indiana Pacers",
+        "Oklahoma City Thunder"
+      ]
+    },
+    {
+      "id": "q-055",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Laquelle de ces équipes ne fait pas partie de la division Centrale ?",
+      "bonne_reponse": "Atlanta Hawks",
+      "mauvaises_reponses": [
+        "Chicago Bulls",
+        "Indiana Pacers",
+        "Detroit Pistons"
+      ]
+    },
+    {
+      "id": "q-056",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Quelle équipe s’est d’abord appelée les « Chaparrals » avant son nom actuel ?",
+      "bonne_reponse": "San Antonio Spurs",
+      "mauvaises_reponses": [
+        "Phoenix Suns",
+        "Sacramento Kings",
+        "Denver Nuggets"
+      ]
+    },
+    {
+      "id": "q-057",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Dans laquelle de ces franchises Robert Horry n’a-t-il pas remporté de titre ?",
+      "bonne_reponse": "Chicago Bulls",
+      "mauvaises_reponses": [
+        "Houston Rockets",
+        "Los Angeles Lakers",
+        "San Antonio Spurs"
+      ]
+    },
+    {
+      "id": "q-058",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quelle équipe a drafté Kobe Bryant en 1996 ?",
+      "bonne_reponse": "Charlotte Hornets",
+      "mauvaises_reponses": [
+        "Houston Rockets",
+        "Los Angeles Lakers",
+        "Detroit Pistons"
+      ]
+    },
+    {
+      "id": "q-059",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Combien de titres NBA les Pacers ont-ils remporté ?",
+      "bonne_reponse": "0",
+      "mauvaises_reponses": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "id": "q-060",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Combien de titres NBA les Spurs ont-ils remporté ?",
+      "bonne_reponse": "5",
+      "mauvaises_reponses": [
+        "4",
+        "6",
+        "7"
+      ]
+    },
+    {
+      "id": "q-061",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Combien de titres NBA les Pistons ont-ils remporté ?",
+      "bonne_reponse": "3",
+      "mauvaises_reponses": [
+        "1",
+        "2",
+        "4"
+      ]
+    },
+    {
+      "id": "q-062",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Combien de titres NBA les Bulls ont-ils remporté ?",
+      "bonne_reponse": "6",
+      "mauvaises_reponses": [
+        "3",
+        "4",
+        "5"
+      ]
+    },
+    {
+      "id": "q-063",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Combien de titres NBA les Knicks ont-ils remporté ?",
+      "bonne_reponse": "3",
+      "mauvaises_reponses": [
+        "4",
+        "5",
+        "6"
+      ]
+    },
+    {
+      "id": "q-064",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Combien de titres NBA le Heat a-il remporté ?",
+      "bonne_reponse": "3",
+      "mauvaises_reponses": [
+        "2",
+        "4",
+        "5"
+      ]
+    },
+    {
+      "id": "q-065",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Combien de titres NBA les Rockets ont-ils remporté ?",
+      "bonne_reponse": "2",
+      "mauvaises_reponses": [
+        "0",
+        "1",
+        "3"
+      ]
+    },
+    {
+      "id": "q-066",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "De quelle franchise Eminem est-il un grand fan ?",
+      "bonne_reponse": "Detroit Pistons",
+      "mauvaises_reponses": [
+        "Brooklyn Nets",
+        "Los Angeles Lakers",
+        "Chicago Bulls"
+      ]
+    },
+    {
+      "id": "q-067",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Pour quelle franchise NBA Drazen Petrovic a-t-il joué le plus de matchs ?",
+      "bonne_reponse": "Nets",
+      "mauvaises_reponses": [
+        "Blazers",
+        "Bucks",
+        "Bulls"
+      ]
+    },
+    {
+      "id": "q-068",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Combien y a-t-il de franchises NBA en Floride ?",
+      "bonne_reponse": "2",
+      "mauvaises_reponses": [
+        "1",
+        "3",
+        "4"
+      ]
+    },
+    {
+      "id": "q-069",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Combien y a-t-il de franchises NBA en Californie ?",
+      "bonne_reponse": "4",
+      "mauvaises_reponses": [
+        "2",
+        "3",
+        "5"
+      ]
+    },
+    {
+      "id": "q-070",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Quelle franchise a été basée à Philadelphie, puis à San Francisco, puis à Oakland ?",
+      "bonne_reponse": "Warriors",
+      "mauvaises_reponses": [
+        "Nets",
+        "76ers",
+        "Clippers"
+      ]
+    },
+    {
+      "id": "q-071",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Quelle ville a accueilli les matchs des New Orleans Hornets entre 2005 et 2007 à la suite de l’ouragan Katrina ?",
+      "bonne_reponse": "Oklahoma City",
+      "mauvaises_reponses": [
+        "Charlotte",
+        "Atlanta",
+        "Dallas"
+      ]
+    },
+    {
+      "id": "q-072",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Laquelle de ces équipes n’a pas été coachée par Pat Riley ?",
+      "bonne_reponse": "Boston Celtics",
+      "mauvaises_reponses": [
+        "New York Knicks",
+        "Los Angeles Lakers",
+        "Miami Heat"
+      ]
+    },
+    {
+      "id": "q-073",
+      "type": "vrai_faux",
+      "difficulte": 1,
+      "question": "Vrai ou faux, le Canada a déjà eu deux franchises NBA en même temps.",
+      "bonne_reponse": "Vrai",
+      "mauvaises_reponses": [
+        "Faux"
+      ]
+    },
+    {
+      "id": "q-074",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Lequel de ces joueurs n’a jamais joué à Miami ?",
+      "bonne_reponse": "Chris Paul",
+      "mauvaises_reponses": [
+        "Bruce Bowen",
+        "Ray Allen",
+        "Shaquille O’Neal"
+      ]
+    },
+    {
+      "id": "q-075",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quelle franchise NBA est championne en 1991 pour la première fois de son histoire ?",
+      "bonne_reponse": "Chicago Bulls",
+      "mauvaises_reponses": [
+        "Detroit Pistons",
+        "Utah Jazz",
+        "San Antonio Spurs"
+      ]
+    },
+    {
+      "id": "q-076",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Quelle franchise NBA représente l’état de l’Illinois ?",
+      "bonne_reponse": "Chicago Bulls",
+      "mauvaises_reponses": [
+        "Detroit Pistons",
+        "Cleveland Cavaliers",
+        "Philadelphia 76ers"
+      ]
+    },
+    {
+      "id": "q-077",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Combien y a-t-il de franchises NBA au Texas ?",
+      "bonne_reponse": "3",
+      "mauvaises_reponses": [
+        "2",
+        "4",
+        "Aucune"
+      ]
+    },
+    {
+      "id": "q-078",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Dans quelle ville a eu lieu le premier Slam Dunk Contest (1976) ?",
+      "bonne_reponse": "Denver",
+      "mauvaises_reponses": [
+        "Phoenix",
+        "Los Angeles",
+        "Chicago"
+      ]
+    },
+    {
+      "id": "q-079",
+      "type": "vrai_faux",
+      "difficulte": 2,
+      "question": "Vrai ou faux, les darons de Stephen Curry et Klay Thompson ont déjà joué ensemble en NBA.",
+      "bonne_reponse": "Faux",
+      "mauvaises_reponses": [
+        "Vrai"
+      ]
+    },
+    {
+      "id": "q-080",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quelle franchise NBA se situe dans la capitale de Californie ?",
+      "bonne_reponse": "Sacramento Kings",
+      "mauvaises_reponses": [
+        "Phoenix Suns",
+        "Golden State Warriors",
+        "Los Angeles Lakers"
+      ]
+    },
+    {
+      "id": "q-081",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Contre quelle équipe Tracy McGrady (« T-Mac ») a-t-il un jour scoré 13 points en 35 secondes ?",
+      "bonne_reponse": "San Antonio Spurs",
+      "mauvaises_reponses": [
+        "Boston Celtics",
+        "Los Angeles Lakers",
+        "Miami Heat"
+      ]
+    },
+    {
+      "id": "q-082",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Dans quelle équipe Mike D’Antoni est-il devenu connu pour son style de jeu appelé « Run and Gun » ?",
+      "bonne_reponse": "Phoenix Suns",
+      "mauvaises_reponses": [
+        "Houston Rockets",
+        "New York Knicks",
+        "Los Angeles Lakers"
+      ]
+    },
+    {
+      "id": "q-083",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "En 2018, combien de joueurs avaient leur maillot retiré à Orlando ?",
+      "bonne_reponse": "0",
+      "mauvaises_reponses": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "id": "q-084",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Pourquoi l’équipe de Denver s’appelle les « Nuggets » ?",
+      "bonne_reponse": "En référence à la ruée vers l’or",
+      "mauvaises_reponses": [
+        "C’est une région avec beaucoup d’élevages de poulets",
+        "En référence à leur joueur historique Johnny Nugget",
+        "Le nom « Wings » était déjà pris"
+      ]
+    },
+    {
+      "id": "q-085",
+      "type": "vrai_faux",
+      "difficulte": 1,
+      "question": "Vrai ou faux, Manu Ginobili a fait toute sa carrière dans une seule franchise.",
+      "bonne_reponse": "Vrai",
+      "mauvaises_reponses": [
+        "Faux"
+      ]
+    },
+    {
+      "id": "q-086",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quel pays a osé remporter le titre olympique en 2004 en battant les Etats-Unis ?",
+      "bonne_reponse": "Argentine",
+      "mauvaises_reponses": [
+        "Allemagne",
+        "France",
+        "Grèce"
+      ]
+    },
+    {
+      "id": "q-087",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Dans quelle équipe Gilbert Arenas et Javaris Crittenton se sont menacés avec des flingues ?",
+      "bonne_reponse": "Washington Wizards",
+      "mauvaises_reponses": [
+        "Boston Celtics",
+        "Detroit Pistons",
+        "Los Angeles Lakers"
+      ]
+    },
+    {
+      "id": "q-088",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Kendrick Perkins, Kevin Love et Hasheem Thabeet ont été draftés par quelle franchise ?",
+      "bonne_reponse": "Memphis Grizzlies",
+      "mauvaises_reponses": [
+        "Cleveland Cavaliers",
+        "Los Angeles Lakers",
+        "Miami Heat"
+      ]
+    },
+    {
+      "id": "q-089",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Laquelle de ces salles n’a jamais accueilli les Lakers pour jouer leurs matchs à domicile ?",
+      "bonne_reponse": "Oracle Arena",
+      "mauvaises_reponses": [
+        "Minneapolis Auditorium",
+        "Forum d’Inglewood",
+        "Staples Center"
+      ]
+    },
+    {
+      "id": "q-090",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Combien d’équipes ont un oiseau comme logo ?",
+      "bonne_reponse": "2",
+      "mauvaises_reponses": [
+        "0",
+        "1",
+        "3"
+      ]
+    },
+    {
+      "id": "q-091",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Dans quelle ville évoluaient les Warriors lors du premier back to back de leur histoire ?",
+      "bonne_reponse": "Oakland",
+      "mauvaises_reponses": [
+        "San Jose",
+        "San Francisco",
+        "Sacramento"
+      ]
+    },
+    {
+      "id": "q-092",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Lors de sa première saison à Miami, LeBron James a perdu en finale, contre qui ?",
+      "bonne_reponse": "Dallas Mavericks",
+      "mauvaises_reponses": [
+        "San Antonio Spurs",
+        "Los Angeles Lakers",
+        "Golden State Warriors"
+      ]
+    },
+    {
+      "id": "q-093",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "De quelle équipe Justin Timberlake est-il fan ?",
+      "bonne_reponse": "Memphis Grizzlies",
+      "mauvaises_reponses": [
+        "Los Angeles Lakers",
+        "Miami Heat",
+        "New York Knicks"
+      ]
+    },
+    {
+      "id": "q-094",
+      "type": "vrai_faux",
+      "difficulte": 2,
+      "question": "Vrai ou faux, le tout premier nom des Philadelphia 76ers était les « Syracuse Nationals ».",
+      "bonne_reponse": "Vrai",
+      "mauvaises_reponses": [
+        "Faux"
+      ]
+    },
+    {
+      "id": "q-095",
+      "type": "vrai_faux",
+      "difficulte": 2,
+      "question": "Vrai ou faux, les Raptors ont déjà battu LeBron sur une série de Playoffs.",
+      "bonne_reponse": "Faux",
+      "mauvaises_reponses": [
+        "Vrai"
+      ]
+    },
+    {
+      "id": "q-096",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Quelle est la toute première ville dans laquelle les Pistons ont joué ?",
+      "bonne_reponse": "Fort Wayne (Indiana)",
+      "mauvaises_reponses": [
+        "Buffalo (état de New York)",
+        "Louisville (Kentucky)",
+        "Columbus (Ohio)"
+      ]
+    },
+    {
+      "id": "q-097",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "De quelle équipe Jack Nicholson est-il le fan numéro 1 ?",
+      "bonne_reponse": "Los Angeles Lakers",
+      "mauvaises_reponses": [
+        "Miami Heat",
+        "Golden State Warriors",
+        "Los Angeles Clippers"
+      ]
+    },
+    {
+      "id": "q-098",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quelle équipe n’a pas été coachée par Mike D’Antoni ?",
+      "bonne_reponse": "Golden State Warriors",
+      "mauvaises_reponses": [
+        "Phoenix Suns",
+        "Houston Rockets",
+        "Denver Nuggets"
+      ]
+    },
+    {
+      "id": "q-099",
+      "type": "vrai_faux",
+      "difficulte": 1,
+      "question": "Vrai ou faux, la mascotte du Magic d’Orlando est Pluto.",
+      "bonne_reponse": "Faux",
+      "mauvaises_reponses": [
+        "Vrai"
+      ]
+    },
+    {
+      "id": "q-100",
+      "type": "vrai_faux",
+      "difficulte": 2,
+      "question": "Vrai ou faux, Dirk Nowitzki a fait toute sa carrière dans une seule franchise.",
+      "bonne_reponse": "Vrai",
+      "mauvaises_reponses": [
+        "Faux"
+      ]
+    },
+    {
+      "id": "q-101",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Combien de fois les Spurs ont-ils loupé les Playoffs entre 1978 et 2018 ?",
+      "bonne_reponse": "4",
+      "mauvaises_reponses": [
+        "2",
+        "3",
+        "5"
+      ]
+    },
+    {
+      "id": "q-102",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quel joueur était surnommé « The Truth » ?",
+      "bonne_reponse": "Paul Pierce",
+      "mauvaises_reponses": [
+        "Michael Jordan",
+        "Allen Iverson",
+        "Ray Allen"
+      ]
+    },
+    {
+      "id": "q-103",
+      "type": "vrai_faux",
+      "difficulte": 2,
+      "question": "Vrai ou faux, Earvin Johnson a obtenu son surnom « Magic » car il était fan de la ville d’Orlando.",
+      "bonne_reponse": "Faux",
+      "mauvaises_reponses": [
+        "Vrai"
+      ]
+    },
+    {
+      "id": "q-104",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "En quelle année le premier joueur français a-t-il été drafté en NBA (Jean-Claude Lefebvre) ?",
+      "bonne_reponse": "1960",
+      "mauvaises_reponses": [
+        "1965",
+        "1970",
+        "1975"
+      ]
+    },
+    {
+      "id": "q-105",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Bill Russell ou David Robinson : lequel a remporté un titre pour son dernier match NBA ?",
+      "bonne_reponse": "Les deux",
+      "mauvaises_reponses": [
+        "Bill Russell",
+        "David Robinson",
+        "Aucun"
+      ]
+    },
+    {
+      "id": "q-106",
+      "type": "vrai_faux",
+      "difficulte": 1,
+      "question": "Vrai ou faux, la famille Curry a fait fortune dans le commerce des épices.",
+      "bonne_reponse": "Faux",
+      "mauvaises_reponses": [
+        "Vrai"
+      ]
+    },
+    {
+      "id": "q-107",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quel coach est le plus titré en NBA ?",
+      "bonne_reponse": "Phil Jackson",
+      "mauvaises_reponses": [
+        "Steve Kerr",
+        "Pat Riley",
+        "Gregg Popovich"
+      ]
+    },
+    {
+      "id": "q-108",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "A deux centimètres près, quelle taille fait Rudy Gobert ?",
+      "bonne_reponse": "2m16",
+      "mauvaises_reponses": [
+        "2m12",
+        "2m20",
+        "2m24"
+      ]
+    }
+  ]
+}

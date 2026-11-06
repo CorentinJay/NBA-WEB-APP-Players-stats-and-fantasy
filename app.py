@@ -8,6 +8,8 @@ from datetime import datetime, date, timedelta
 import pytz
 import plotly.graph_objects as go
 
+from quiz import render_quiz_page
+
 # ─────────────────────────────────────────────
 # CONFIG & CONSTANTS
 # ─────────────────────────────────────────────
@@ -27,6 +29,7 @@ ALL_STAR_START = date(2027, 2, 19)
 ALL_STAR_END   = date(2027, 2, 21)
 
 PAGES = ["🏠 Home", "👤 Players", "⚔️ Player VS", "🏟️ Team Stats", "🏥 Injuries", "🔮 Fantasy Predictions"]
+QUIZ_PAGE = "🧠 QUIZZ NBA"   # separate button, lower in the sidebar
 
 # ─────────────────────────────────────────────
 # IMAGES
@@ -89,6 +92,8 @@ st.markdown(f"""
         cursor: pointer; width: 100%;
     }}
     .stButton > button:hover {{ background-color: {NBA_BLUE}; color: {NBA_WHITE}; }}
+    .st-key-nav_quiz button {{ border: 2px solid {NBA_WHITE}; }}
+    .st-key-nav_quiz button:hover {{ background-color: {NBA_WHITE}; color: {NBA_RED}; }}
     .stTabs [data-baseweb="tab-list"] {{ gap: 8px; }}
     .stTabs [data-baseweb="tab"] {{
         background-color: {NBA_WHITE}; color: {NBA_BLUE};
@@ -104,6 +109,16 @@ st.markdown(f"""
 
 if "page" not in st.session_state:
     st.session_state.page = "🏠 Home"
+if "nav_radio" not in st.session_state:
+    st.session_state.nav_radio = st.session_state.page
+
+def go_to(target: str):
+    """Single navigation entry point (sidebar radio, quiz button, home shortcuts)."""
+    st.session_state.page = target
+    # Radio shows nothing selected while on the quiz page
+    st.session_state.nav_radio = target if target in PAGES else None
+    if target != QUIZ_PAGE:
+        st.session_state.pop("quiz", None)  # leaving the quiz cancels the current game
 
 # ─────────────────────────────────────────────
 # SIDEBAR
@@ -113,16 +128,17 @@ with st.sidebar:
     st.markdown(f"<h1 style='color:{NBA_WHITE};text-align:center;'>🏀 NBA Stats</h1>", unsafe_allow_html=True)
     st.markdown("---")
 
-    page = st.radio(
+    st.radio(
         "Navigation",
         PAGES,
+        key="nav_radio",
         label_visibility="collapsed",
-        index=PAGES.index(st.session_state.page)
+        on_change=lambda: go_to(st.session_state.nav_radio),
     )
 
-    if page != st.session_state.page:
-        st.session_state.page = page
-        st.rerun()
+    # Quiz entry, well below the other pages
+    st.markdown("<div style='height:160px'></div>", unsafe_allow_html=True)
+    st.button(QUIZ_PAGE, key="nav_quiz", on_click=go_to, args=(QUIZ_PAGE,))
 
     st.markdown("---")
     st.markdown(f"<p style='color:{NBA_WHITE};text-align:center;'><b>Created by Corentin Jay</b></p>", unsafe_allow_html=True)
@@ -441,9 +457,7 @@ if st.session_state.page == "🏠 Home":
     ]
     for col, target, subtitle in shortcuts:
         with col:
-            if st.button(target, help=subtitle, use_container_width=True):
-                st.session_state.page = target
-                st.rerun()
+            st.button(target, help=subtitle, use_container_width=True, on_click=go_to, args=(target,))
 
 # ─────────────────────────────────────────────
 # PAGE — PLAYERS
@@ -665,3 +679,10 @@ elif st.session_state.page == "🔮 Fantasy Predictions":
         st.caption("🔮 **Data Source:** Prediction model based on NBA statistics | Generated daily")
     except Exception as e:
         st.error(f"❌ Error loading fantasy predictions: {e}")
+
+# ─────────────────────────────────────────────
+# PAGE — QUIZZ NBA
+# ─────────────────────────────────────────────
+
+elif st.session_state.page == QUIZ_PAGE:
+    render_quiz_page()
