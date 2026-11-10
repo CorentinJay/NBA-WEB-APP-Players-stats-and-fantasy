@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-06",
+  "version": "2026-11-10",
   "questions": [
     {
       "id": "q-001",
@@ -38,7 +38,7 @@
       "type": "qcm",
       "difficulte": 3,
       "question": "Avec quelle franchise Dennis Johnson a-t-il été MVP des Finales ?",
-      "bonne_reponse": "Seattle Supersonics",
+      "bonne_reponse": "Seattle SuperSonics",
       "mauvaises_reponses": [
         "Vancouver Grizzlies",
         "Los Angeles Lakers",
@@ -142,7 +142,7 @@
     {
       "id": "q-013",
       "type": "qcm",
-      "difficulte": 1,
+      "difficulte": 2,
       "question": "Laquelle de ces équipes n’a pas été championne dans les 2000’s ?",
       "bonne_reponse": "Houston Rockets",
       "mauvaises_reponses": [
@@ -188,7 +188,7 @@
     {
       "id": "q-017",
       "type": "vrai_faux",
-      "difficulte": 1,
+      "difficulte": 2,
       "question": "Vrai ou faux, Il y a une franchise qui s’appelait les « Saint-Louis Bombers ».",
       "bonne_reponse": "Vrai",
       "mauvaises_reponses": [
@@ -210,7 +210,7 @@
     {
       "id": "q-019",
       "type": "vrai_faux",
-      "difficulte": 1,
+      "difficulte": 2,
       "question": "Vrai ou faux, Il y a eu une franchise à Baltimore.",
       "bonne_reponse": "Vrai",
       "mauvaises_reponses": [
@@ -220,7 +220,7 @@
     {
       "id": "q-020",
       "type": "qcm",
-      "difficulte": 1,
+      "difficulte": 2,
       "question": "Quelle équipe est championne en 2006 après avoir été menée 0-2 ?",
       "bonne_reponse": "Miami Heat",
       "mauvaises_reponses": [
@@ -256,7 +256,7 @@
     {
       "id": "q-023",
       "type": "qcm",
-      "difficulte": 1,
+      "difficulte": 2,
       "question": "En 2001, les Lakers n’ont perdu qu’un seul match de playoffs avant d’être champions, contre qui ?",
       "bonne_reponse": "Philadelphia 76ers",
       "mauvaises_reponses": [
@@ -340,7 +340,7 @@
     {
       "id": "q-030",
       "type": "vrai_faux",
-      "difficulte": 1,
+      "difficulte": 2,
       "question": "Vrai ou faux, le surnom de l’équipe de Portland a déjà été les « Portland Jail Blazers ».",
       "bonne_reponse": "Vrai",
       "mauvaises_reponses": [
@@ -470,7 +470,7 @@
     {
       "id": "q-041",
       "type": "qcm",
-      "difficulte": 1,
+      "difficulte": 2,
       "question": "Laquelle de ces équipes a été championne en 2014 après avoir été traumatisée l’année précédente ?",
       "bonne_reponse": "San Antonio Spurs",
       "mauvaises_reponses": [
@@ -518,7 +518,7 @@
     {
       "id": "q-045",
       "type": "qcm",
-      "difficulte": 1,
+      "difficulte": 2,
       "question": "Laquelle de ces équipes a été championne en 2008 ?",
       "bonne_reponse": "Boston Celtics",
       "mauvaises_reponses": [
@@ -638,7 +638,7 @@
     {
       "id": "q-055",
       "type": "qcm",
-      "difficulte": 2,
+      "difficulte": 1,
       "question": "Laquelle de ces équipes ne fait pas partie de la division Centrale ?",
       "bonne_reponse": "Atlanta Hawks",
       "mauvaises_reponses": [
@@ -686,7 +686,7 @@
     {
       "id": "q-059",
       "type": "qcm",
-      "difficulte": 1,
+      "difficulte": 2,
       "question": "Combien de titres NBA les Pacers ont-ils remporté ?",
       "bonne_reponse": "0",
       "mauvaises_reponses": [
@@ -698,7 +698,7 @@
     {
       "id": "q-060",
       "type": "qcm",
-      "difficulte": 1,
+      "difficulte": 2,
       "question": "Combien de titres NBA les Spurs ont-ils remporté ?",
       "bonne_reponse": "5",
       "mauvaises_reponses": [
@@ -710,7 +710,7 @@
     {
       "id": "q-061",
       "type": "qcm",
-      "difficulte": 1,
+      "difficulte": 2,
       "question": "Combien de titres NBA les Pistons ont-ils remporté ?",
       "bonne_reponse": "3",
       "mauvaises_reponses": [
@@ -722,7 +722,7 @@
     {
       "id": "q-062",
       "type": "qcm",
-      "difficulte": 1,
+      "difficulte": 2,
       "question": "Combien de titres NBA les Bulls ont-ils remporté ?",
       "bonne_reponse": "6",
       "mauvaises_reponses": [
@@ -734,7 +734,7 @@
     {
       "id": "q-063",
       "type": "qcm",
-      "difficulte": 1,
+      "difficulte": 2,
       "question": "Combien de titres NBA les Knicks ont-ils remporté ?",
       "bonne_reponse": "3",
       "mauvaises_reponses": [
@@ -746,8 +746,8 @@
     {
       "id": "q-064",
       "type": "qcm",
-      "difficulte": 1,
-      "question": "Combien de titres NBA le Heat a-il remporté ?",
+      "difficulte": 2,
+      "question": "Combien de titres NBA le Heat a-t-il remporté ?",
       "bonne_reponse": "3",
       "mauvaises_reponses": [
         "2",
@@ -758,7 +758,7 @@
     {
       "id": "q-065",
       "type": "qcm",
-      "difficulte": 1,
+      "difficulte": 2,
       "question": "Combien de titres NBA les Rockets ont-ils remporté ?",
       "bonne_reponse": "2",
       "mauvaises_reponses": [
@@ -818,7 +818,7 @@
     {
       "id": "q-070",
       "type": "qcm",
-      "difficulte": 1,
+      "difficulte": 2,
       "question": "Quelle franchise a été basée à Philadelphie, puis à San Francisco, puis à Oakland ?",
       "bonne_reponse": "Warriors",
       "mauvaises_reponses": [
@@ -994,7 +994,7 @@
     {
       "id": "q-085",
       "type": "vrai_faux",
-      "difficulte": 1,
+      "difficulte": 2,
       "question": "Vrai ou faux, Manu Ginobili a fait toute sa carrière dans une seule franchise.",
       "bonne_reponse": "Vrai",
       "mauvaises_reponses": [
@@ -1263,6 +1263,864 @@
         "2m12",
         "2m20",
         "2m24"
+      ]
+    },
+    {
+      "id": "q-109",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Qui a rendu célèbre la phrase « Anything is possible » en 2008 ?",
+      "bonne_reponse": "Kevin Garnett",
+      "mauvaises_reponses": [
+        "Shaquille O’Neal",
+        "Dwyane Wade",
+        "LeBron James"
+      ]
+    },
+    {
+      "id": "q-110",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "A 3 points près, combien de points Pau Gasol a-t-il collés à la France en demi-finale de l’Euro 2015 ?",
+      "bonne_reponse": "40",
+      "mauvaises_reponses": [
+        "34",
+        "46",
+        "52"
+      ]
+    },
+    {
+      "id": "q-111",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "A quel poste Rudy Gobert et Victor Wembanyama jouent-ils ?",
+      "bonne_reponse": "Pivot",
+      "mauvaises_reponses": [
+        "Meneur",
+        "Arrière",
+        "Ailier"
+      ]
+    },
+    {
+      "id": "q-112",
+      "type": "vrai_faux",
+      "difficulte": 1,
+      "question": "Vrai ou faux, comme Barack Obama, Donald Trump est un grand fan de basket.",
+      "bonne_reponse": "Faux",
+      "mauvaises_reponses": [
+        "Vrai"
+      ]
+    },
+    {
+      "id": "q-113",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Quel joueur était surnommé « Chairman of the Boards » ?",
+      "bonne_reponse": "Moses Malone",
+      "mauvaises_reponses": [
+        "Wilt Chamberlain",
+        "Kareem Abdul-Jabbar",
+        "Bill Russell"
+      ]
+    },
+    {
+      "id": "q-114",
+      "type": "vrai_faux",
+      "difficulte": 1,
+      "question": "Vrai ou faux, Jacques Monclar a été coach de l’équipe de France de basket.",
+      "bonne_reponse": "Faux",
+      "mauvaises_reponses": [
+        "Vrai"
+      ]
+    },
+    {
+      "id": "q-115",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Quel joueur les Blazers ont-ils sélectionné devant Michael Jordan lors de la Draft 1984 ?",
+      "bonne_reponse": "Sam Bowie",
+      "mauvaises_reponses": [
+        "Sam Perkins",
+        "Hakeem Olajuwon",
+        "Charles Barkley"
+      ]
+    },
+    {
+      "id": "q-116",
+      "type": "vrai_faux",
+      "difficulte": 2,
+      "question": "Vrai ou faux, Vince Carter était surnommé « Half Man, Half Amazing ».",
+      "bonne_reponse": "Vrai",
+      "mauvaises_reponses": [
+        "Faux"
+      ]
+    },
+    {
+      "id": "q-117",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "En quelle année Michael Jordan a-t-il pris sa première retraite sportive ?",
+      "bonne_reponse": "1993",
+      "mauvaises_reponses": [
+        "1992",
+        "1994",
+        "1995"
+      ]
+    },
+    {
+      "id": "q-118",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "En quelle année Michael Jordan a-t-il pris sa deuxième retraite sportive ?",
+      "bonne_reponse": "1999",
+      "mauvaises_reponses": [
+        "1996",
+        "1997",
+        "1998"
+      ]
+    },
+    {
+      "id": "q-119",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "En quelle année Michael Jordan a-t-il pris sa troisième retraite sportive ?",
+      "bonne_reponse": "2003",
+      "mauvaises_reponses": [
+        "2004",
+        "2005",
+        "2006"
+      ]
+    },
+    {
+      "id": "q-120",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "A 4 près, combien de centimètres séparent le plus grand et le plus petit joueur de l’histoire de la NBA ?",
+      "bonne_reponse": "71",
+      "mauvaises_reponses": [
+        "60",
+        "80",
+        "90"
+      ]
+    },
+    {
+      "id": "q-121",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "En quelle année Victor Wembanyama a-t-il été drafté ?",
+      "bonne_reponse": "2023",
+      "mauvaises_reponses": [
+        "2022",
+        "2024",
+        "2025"
+      ]
+    },
+    {
+      "id": "q-122",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Par quelle équipe Evan Fournier a-t-il été drafté en 2012 ?",
+      "bonne_reponse": "Denver Nuggets",
+      "mauvaises_reponses": [
+        "Boston Celtics",
+        "New York Knicks",
+        "Orlando Magic"
+      ]
+    },
+    {
+      "id": "q-123",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Dans quelle équipe Evan Fournier n’a-t-il pas évolué au cours de sa carrière NBA ?",
+      "bonne_reponse": "Miami Heat",
+      "mauvaises_reponses": [
+        "Boston Celtics",
+        "New York Knicks",
+        "Denver Nuggets"
+      ]
+    },
+    {
+      "id": "q-124",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Dans quelle équipe Rudy Gobert n’a-t-il pas évolué au cours de sa carrière ?",
+      "bonne_reponse": "Portland Trail Blazers",
+      "mauvaises_reponses": [
+        "Utah Jazz",
+        "Minnesota Timberwolves",
+        "Cholet Basket"
+      ]
+    },
+    {
+      "id": "q-125",
+      "type": "vrai_faux",
+      "difficulte": 1,
+      "question": "Vrai ou faux, Victor Wembanyama a été élu DPOY de manière unanime en 2026.",
+      "bonne_reponse": "Vrai",
+      "mauvaises_reponses": [
+        "Faux"
+      ]
+    },
+    {
+      "id": "q-126",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quel joueur a remporté le plus de titres NBA au cours de sa carrière ?",
+      "bonne_reponse": "Bill Russell",
+      "mauvaises_reponses": [
+        "LeBron James",
+        "Wilt Chamberlain",
+        "Michael Jordan"
+      ]
+    },
+    {
+      "id": "q-127",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quel joueur a été élu MVP en 2016 ?",
+      "bonne_reponse": "Stephen Curry",
+      "mauvaises_reponses": [
+        "LeBron James",
+        "Kevin Durant",
+        "Russell Westbrook"
+      ]
+    },
+    {
+      "id": "q-128",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quel joueur a été élu MVP en 2017 ?",
+      "bonne_reponse": "Russell Westbrook",
+      "mauvaises_reponses": [
+        "Stephen Curry",
+        "James Harden",
+        "Kevin Durant"
+      ]
+    },
+    {
+      "id": "q-129",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quel joueur a été élu MVP en 2018 ?",
+      "bonne_reponse": "James Harden",
+      "mauvaises_reponses": [
+        "LeBron James",
+        "Kevin Durant",
+        "Giannis Antetokounmpo"
+      ]
+    },
+    {
+      "id": "q-130",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quel joueur a été élu MVP en 2019 ?",
+      "bonne_reponse": "Giannis Antetokounmpo",
+      "mauvaises_reponses": [
+        "Nikola Jokic",
+        "James Harden",
+        "Kevin Durant"
+      ]
+    },
+    {
+      "id": "q-131",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quel joueur a été élu MVP en 2020 ?",
+      "bonne_reponse": "Giannis Antetokounmpo",
+      "mauvaises_reponses": [
+        "Nikola Jokic",
+        "James Harden",
+        "Stephen Curry"
+      ]
+    },
+    {
+      "id": "q-132",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quel joueur a été élu MVP en 2021 ?",
+      "bonne_reponse": "Nikola Jokic",
+      "mauvaises_reponses": [
+        "James Harden",
+        "Kevin Durant",
+        "Giannis Antetokounmpo"
+      ]
+    },
+    {
+      "id": "q-133",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quel joueur a été élu MVP en 2022 ?",
+      "bonne_reponse": "Nikola Jokic",
+      "mauvaises_reponses": [
+        "Shai Gilgeous-Alexander",
+        "Joel Embiid",
+        "Giannis Antetokounmpo"
+      ]
+    },
+    {
+      "id": "q-134",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quel joueur a été élu MVP en 2023 ?",
+      "bonne_reponse": "Joel Embiid",
+      "mauvaises_reponses": [
+        "Nikola Jokic",
+        "Shai Gilgeous-Alexander",
+        "Giannis Antetokounmpo"
+      ]
+    },
+    {
+      "id": "q-135",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quel joueur a été élu MVP en 2024 ?",
+      "bonne_reponse": "Nikola Jokic",
+      "mauvaises_reponses": [
+        "Shai Gilgeous-Alexander",
+        "Luka Doncic",
+        "Giannis Antetokounmpo"
+      ]
+    },
+    {
+      "id": "q-136",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Quel joueur a été élu MVP en 2025 ?",
+      "bonne_reponse": "Shai Gilgeous-Alexander",
+      "mauvaises_reponses": [
+        "Nikola Jokic",
+        "Luka Doncic",
+        "Jayson Tatum"
+      ]
+    },
+    {
+      "id": "q-137",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Quel joueur a été élu MVP en 2026 ?",
+      "bonne_reponse": "Shai Gilgeous-Alexander",
+      "mauvaises_reponses": [
+        "Nikola Jokic",
+        "Luka Doncic",
+        "Giannis Antetokounmpo"
+      ]
+    },
+    {
+      "id": "q-138",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Où est né Hakeem Olajuwon, double MVP des Finales ?",
+      "bonne_reponse": "Lagos, Nigéria",
+      "mauvaises_reponses": [
+        "Brazzaville, Congo",
+        "Bamako, Mali",
+        "Abidjan, Côte d’Ivoire"
+      ]
+    },
+    {
+      "id": "q-139",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quel numéro portait Tim Duncan en NBA ?",
+      "bonne_reponse": "21",
+      "mauvaises_reponses": [
+        "23",
+        "7",
+        "14"
+      ]
+    },
+    {
+      "id": "q-140",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Je suis droitier au basket, j’écris de la main gauche et je porte le numéro 23, qui suis-je ?",
+      "bonne_reponse": "LeBron James",
+      "mauvaises_reponses": [
+        "Michael Jordan",
+        "Trey Alexander",
+        "Devin Brown"
+      ]
+    },
+    {
+      "id": "q-141",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Combien y a-t-il de franchises en NBA ?",
+      "bonne_reponse": "30",
+      "mauvaises_reponses": [
+        "28",
+        "32",
+        "34"
+      ]
+    },
+    {
+      "id": "q-142",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Combien y a-t-il de divisions au sein de la NBA ?",
+      "bonne_reponse": "6",
+      "mauvaises_reponses": [
+        "4",
+        "5",
+        "7"
+      ]
+    },
+    {
+      "id": "q-143",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Combien y a-t-il de franchises NBA à Los Angeles ?",
+      "bonne_reponse": "2",
+      "mauvaises_reponses": [
+        "1",
+        "3",
+        "4"
+      ]
+    },
+    {
+      "id": "q-144",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Lequel de ces joueurs n’a pas été drafté dans le Top5 en 2003 ?",
+      "bonne_reponse": "Mickaël Pietrus",
+      "mauvaises_reponses": [
+        "Darko Milicic",
+        "Carmelo Anthony",
+        "LeBron James"
+      ]
+    },
+    {
+      "id": "q-145",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quel meneur des Chicago Bulls a été MVP avant de se blesser gravement au genou ?",
+      "bonne_reponse": "Derrick Rose",
+      "mauvaises_reponses": [
+        "Joakim Noah",
+        "Caleb Wilson",
+        "Coby White"
+      ]
+    },
+    {
+      "id": "q-146",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Quel joueur fut le meilleur marqueur de la Dream Team aux JO de 1992 ?",
+      "bonne_reponse": "Charles Barkley",
+      "mauvaises_reponses": [
+        "Michael Jordan",
+        "Larry Bird",
+        "Magic Johnson"
+      ]
+    },
+    {
+      "id": "q-147",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "A quel poste Frank Ntilikina joue-t-il ?",
+      "bonne_reponse": "Meneur",
+      "mauvaises_reponses": [
+        "Arrière",
+        "Ailier",
+        "Pivot"
+      ]
+    },
+    {
+      "id": "q-148",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "A quelle place Manu Ginobili a-t-il été drafté en 1999 ?",
+      "bonne_reponse": "57ème",
+      "mauvaises_reponses": [
+        "10ème",
+        "50ème",
+        "59ème"
+      ]
+    },
+    {
+      "id": "q-149",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Combien de bagues de champion Robert Horry possède-t-il ?",
+      "bonne_reponse": "7",
+      "mauvaises_reponses": [
+        "5",
+        "6",
+        "8"
+      ]
+    },
+    {
+      "id": "q-150",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Lequel de ces joueurs est meneur ?",
+      "bonne_reponse": "Chris Paul",
+      "mauvaises_reponses": [
+        "Kawhi Leonard",
+        "Carmelo Anthony",
+        "LeBron James"
+      ]
+    },
+    {
+      "id": "q-151",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "A quel poste Nicolas Batum joue-t-il ?",
+      "bonne_reponse": "Ailier",
+      "mauvaises_reponses": [
+        "Arrière",
+        "Meneur",
+        "Pivot"
+      ]
+    },
+    {
+      "id": "q-152",
+      "type": "vrai_faux",
+      "difficulte": 2,
+      "question": "Vrai ou faux, Rasheed Wallace et Ben Wallace sont frères ?",
+      "bonne_reponse": "Faux",
+      "mauvaises_reponses": [
+        "Vrai"
+      ]
+    },
+    {
+      "id": "q-153",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quel est le premier joueur européen à avoir gagné un titre de MVP ?",
+      "bonne_reponse": "Dirk Nowitzki",
+      "mauvaises_reponses": [
+        "Tony Parker",
+        "Pau Gasol",
+        "Drazen Petrovic"
+      ]
+    },
+    {
+      "id": "q-154",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Quel joueur a marqué le plus de points en carrière sans remporter le moindre titre de champion NBA ?",
+      "bonne_reponse": "Karl Malone",
+      "mauvaises_reponses": [
+        "Russell Westbrook",
+        "Carmelo Anthony",
+        "James Harden"
+      ]
+    },
+    {
+      "id": "q-155",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Quel numéro mythique Andrei Kirilenko portait-il en NBA ?",
+      "bonne_reponse": "47",
+      "mauvaises_reponses": [
+        "00",
+        "99",
+        "66"
+      ]
+    },
+    {
+      "id": "q-156",
+      "type": "vrai_faux",
+      "difficulte": 2,
+      "question": "Vrai ou faux, Pat Riley empêchait ses joueurs de déjeuner avec leur famille le jour de match.",
+      "bonne_reponse": "Faux",
+      "mauvaises_reponses": [
+        "Vrai"
+      ]
+    },
+    {
+      "id": "q-157",
+      "type": "vrai_faux",
+      "difficulte": 2,
+      "question": "Vrai ou faux, Pat Riley empêchait ses joueurs de déjeuner avec leurs amis adversaires le jour de match.",
+      "bonne_reponse": "Vrai",
+      "mauvaises_reponses": [
+        "Faux"
+      ]
+    },
+    {
+      "id": "q-158",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Dans quelle ville Tony Parker est-il né ?",
+      "bonne_reponse": "Bruges",
+      "mauvaises_reponses": [
+        "Paris",
+        "Londres",
+        "Lyon"
+      ]
+    },
+    {
+      "id": "q-159",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Qui a gagné le premier Slam Dunk Contest en 1984 ?",
+      "bonne_reponse": "Larry Nance",
+      "mauvaises_reponses": [
+        "Dominique Wilkins",
+        "Spud Webb",
+        "Julius Erving"
+      ]
+    },
+    {
+      "id": "q-160",
+      "type": "vrai_faux",
+      "difficulte": 1,
+      "question": "Vrai ou faux, Shaquille O’Neal basait son jeu sur sa qualité de shoot.",
+      "bonne_reponse": "Faux",
+      "mauvaises_reponses": [
+        "Vrai"
+      ]
+    },
+    {
+      "id": "q-161",
+      "type": "vrai_faux",
+      "difficulte": 3,
+      "question": "Vrai ou faux, John Havlicek a été drafté en NBA et en NFL la même année.",
+      "bonne_reponse": "Vrai",
+      "mauvaises_reponses": [
+        "Faux"
+      ]
+    },
+    {
+      "id": "q-162",
+      "type": "vrai_faux",
+      "difficulte": 2,
+      "question": "Vrai ou faux, un joueur a déjà été élu MVP des Finales alors qu’il était dans l’équipe perdante.",
+      "bonne_reponse": "Vrai",
+      "mauvaises_reponses": [
+        "Faux"
+      ]
+    },
+    {
+      "id": "q-163",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Combien de médailles olympiques a gagné Isiah Thomas ?",
+      "bonne_reponse": "0",
+      "mauvaises_reponses": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "id": "q-164",
+      "type": "vrai_faux",
+      "difficulte": 2,
+      "question": "Vrai ou faux, Stephen Curry et LeBron James sont nés dans la même ville.",
+      "bonne_reponse": "Vrai",
+      "mauvaises_reponses": [
+        "Faux"
+      ]
+    },
+    {
+      "id": "q-165",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "A quel poste Evan Fournier joue-t-il ?",
+      "bonne_reponse": "Arrière",
+      "mauvaises_reponses": [
+        "Meneur",
+        "Ailier",
+        "Pivot"
+      ]
+    },
+    {
+      "id": "q-166",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Dans Space Jam, comment s’appelle le bouledogue de Michael Jordan ?",
+      "bonne_reponse": "Charles",
+      "mauvaises_reponses": [
+        "Larry",
+        "Reggie",
+        "Gary"
+      ]
+    },
+    {
+      "id": "q-167",
+      "type": "vrai_faux",
+      "difficulte": 2,
+      "question": "Vrai ou faux, Andre Iguodala a été élu MVP des Finales alors qu’il n’a pas commencé tous les matchs de la série.",
+      "bonne_reponse": "Vrai",
+      "mauvaises_reponses": [
+        "Faux"
+      ]
+    },
+    {
+      "id": "q-168",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Je suis français, j’ai joué avec les Los Angeles Lakers puis à Villeurbanne, qui suis-je ?",
+      "bonne_reponse": "Ronny Turiaf",
+      "mauvaises_reponses": [
+        "Sekou Doumbouya",
+        "Boris Diaw",
+        "Tony Parker"
+      ]
+    },
+    {
+      "id": "q-169",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Qui est le meilleur marqueur de l’histoire du Miami Heat ?",
+      "bonne_reponse": "Dwyane Wade",
+      "mauvaises_reponses": [
+        "Bam Adebayo",
+        "Shaquille O’Neal",
+        "LeBron James"
+      ]
+    },
+    {
+      "id": "q-170",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Quel joueur a pris le plus de rebonds dans l’histoire de la NBA ?",
+      "bonne_reponse": "Wilt Chamberlain",
+      "mauvaises_reponses": [
+        "Bill Russell",
+        "Kareem Abdul-Jabbar",
+        "Tim Duncan"
+      ]
+    },
+    {
+      "id": "q-171",
+      "type": "vrai_faux",
+      "difficulte": 2,
+      "question": "Vrai ou faux, Boris Diaw a déjà eu une clause dans son contrat qui lui interdisait de trop manger.",
+      "bonne_reponse": "Vrai",
+      "mauvaises_reponses": [
+        "Faux"
+      ]
+    },
+    {
+      "id": "q-172",
+      "type": "vrai_faux",
+      "difficulte": 2,
+      "question": "Vrai ou faux, Dennis Rodman est sorti avec Pamela Anderson.",
+      "bonne_reponse": "Faux",
+      "mauvaises_reponses": [
+        "Vrai"
+      ]
+    },
+    {
+      "id": "q-173",
+      "type": "qcm",
+      "difficulte": 3,
+      "question": "Au bout de combien de matchs Tony Parker est-il devenu titulaire ?",
+      "bonne_reponse": "5",
+      "mauvaises_reponses": [
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    {
+      "id": "q-174",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Combien de pas peut faire un joueur avant de se voir siffler un marcher ?",
+      "bonne_reponse": "2",
+      "mauvaises_reponses": [
+        "1",
+        "3",
+        "4"
+      ]
+    },
+    {
+      "id": "q-175",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "De quel club de foot LeBron James est-il propriétaire minoritaire depuis 2011 ?",
+      "bonne_reponse": "Liverpool",
+      "mauvaises_reponses": [
+        "Manchester United",
+        "PSG",
+        "Real Madrid"
+      ]
+    },
+    {
+      "id": "q-176",
+      "type": "vrai_faux",
+      "difficulte": 1,
+      "question": "Vrai ou faux, il y a une ligne à quatre points située à 9 mètres du cercle, uniquement pour Steph Curry ?",
+      "bonne_reponse": "Faux",
+      "mauvaises_reponses": [
+        "Vrai"
+      ]
+    },
+    {
+      "id": "q-177",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Lequel de ces joueurs n’est pas considéré comme un « Sniper » en NBA ?",
+      "bonne_reponse": "Rudy Gobert",
+      "mauvaises_reponses": [
+        "Stephen Curry",
+        "Klay Thompson",
+        "Ray Allen"
+      ]
+    },
+    {
+      "id": "q-178",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Lequel de ces postes ne fait pas partie du front court ?",
+      "bonne_reponse": "Meneur",
+      "mauvaises_reponses": [
+        "Pivot",
+        "Ailier",
+        "Ailier fort"
+      ]
+    },
+    {
+      "id": "q-179",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Quel joueur NBA a joué dans « Y a-t-il un pilote dans l’avion » ?",
+      "bonne_reponse": "Kareem Abdul-Jabbar",
+      "mauvaises_reponses": [
+        "Michael Jordan",
+        "Shaquille O’Neal",
+        "Kevin Garnett"
+      ]
+    },
+    {
+      "id": "q-180",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Dans lequel de ces films Shaquille O’Neal n’a-t-il pas joué ?",
+      "bonne_reponse": "Space Jam",
+      "mauvaises_reponses": [
+        "Blue Chips",
+        "Scary Movie 4",
+        "Uncle Drew"
+      ]
+    },
+    {
+      "id": "q-181",
+      "type": "qcm",
+      "difficulte": 1,
+      "question": "Quel acteur joue le père de Ray Allen dans « He Got Game » ?",
+      "bonne_reponse": "Denzel Washington",
+      "mauvaises_reponses": [
+        "Morgan Freeman",
+        "Forest Whitaker",
+        "Samuel L. Jackson"
+      ]
+    },
+    {
+      "id": "q-182",
+      "type": "qcm",
+      "difficulte": 2,
+      "question": "Combien Steven Adams a-t-il de frères et sœurs ?",
+      "bonne_reponse": "17",
+      "mauvaises_reponses": [
+        "11",
+        "14",
+        "20"
       ]
     }
   ]
