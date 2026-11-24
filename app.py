@@ -31,7 +31,7 @@ ALL_STAR_END   = date(2027, 2, 21)
 PAGES = ["🏠 Home", "👤 Players", "⚔️ Player VS", "🏟️ Team Stats", "🏥 Injuries", "🔮 Fantasy Predictions"]
 QUIZ_PAGE = "🧠 QUIZZ NBA"   # separate "Game" section in the sidebar
 
-# Sidebar menu: (section title, pages). None = no title.
+# Sidebar menu groups (the name is only for readability: groups are separated by spacing)
 NAV_GROUPS = [
     (None,      ["🏠 Home"]),
     ("Stats",   ["👤 Players", "⚔️ Player VS", "🏟️ Team Stats", "🏥 Injuries"]),
@@ -100,54 +100,59 @@ st.markdown(f"""
     }}
     .stButton > button:hover {{ background-color: {NBA_BLUE}; color: {NBA_WHITE}; }}
 
-    /* ── Sidebar navigation ── */
-    [data-testid="stSidebar"] [data-testid="stVerticalBlock"] {{ gap: 0.3rem; }}
+    /* ── Sidebar navigation: real buttons ── */
+    [data-testid="stSidebar"] [data-testid="stVerticalBlock"] {{ gap: 0.6rem; }}
     .sb-brand {{
         color: {NBA_WHITE}; text-align: center; font-size: 1.7rem; font-weight: 800;
-        padding: 4px 0 14px 0; margin-bottom: 6px;
+        padding: 4px 0 16px 0; margin-bottom: 8px !important;
         border-bottom: 1px solid rgba(255, 255, 255, 0.25);
     }}
     .sb-brand span {{
         display: block; font-size: 0.8rem; font-weight: 500;
         opacity: 0.75; letter-spacing: 0.05em; margin-top: 2px;
     }}
-    .nav-section {{
-        color: rgba(255, 255, 255, 0.65); font-size: 0.72rem; font-weight: 700;
-        letter-spacing: 0.14em; text-transform: uppercase;
-        line-height: 1.5; margin: 0; padding: 14px 0 2px 14px;
-    }}
+    /* Extra space before each group (Stats, Fantasy, Quiz) — set on the button itself */
+    [data-testid="stSidebar"] .st-key-nav_1,
+    [data-testid="stSidebar"] .st-key-nav_5,
+    [data-testid="stSidebar"] .st-key-nav_quiz {{ margin-top: 18px; }}
+
     [data-testid="stSidebar"] .stButton button {{
-        width: 100%; min-height: 0; padding: 9px 14px;
-        border: none; border-radius: 10px;
-        justify-content: flex-start; text-align: left;
-        font-weight: 600; transition: background-color .15s, transform .15s;
+        width: 100%; min-height: 48px; padding: 10px 16px;
+        border-radius: 12px; justify-content: flex-start; text-align: left;
+        font-weight: 600; cursor: pointer;
+        transition: background-color .15s, box-shadow .15s, transform .15s;
     }}
     [data-testid="stSidebar"] .stButton button > div {{ justify-content: flex-start; }}
     /* Label inherits the button color (otherwise the sidebar "p = white" rule wins) */
     [data-testid="stSidebar"] .stButton button p {{
         font-size: 1rem; color: inherit !important; margin: 0; line-height: 1.4;
     }}
-    /* Inactive item */
+    /* Inactive button: frosted, bordered, slight shadow */
     [data-testid="stSidebar"] .stButton button:is([kind="secondary"], [data-testid="stBaseButton-secondary"]) {{
-        background-color: transparent; color: {NBA_WHITE};
+        background-color: rgba(255, 255, 255, 0.12); color: {NBA_WHITE};
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
     }}
     [data-testid="stSidebar"] .stButton button:is([kind="secondary"], [data-testid="stBaseButton-secondary"]):hover {{
-        background-color: rgba(255, 255, 255, 0.14); color: {NBA_WHITE};
-        transform: translateX(3px);
+        background-color: rgba(255, 255, 255, 0.25); color: {NBA_WHITE};
+        border-color: {NBA_WHITE};
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35); transform: translateY(-1px);
     }}
-    /* Active item: white pill + red marker on the left */
+    [data-testid="stSidebar"] .stButton button:active {{ transform: translateY(1px); }}
+    /* Active button: solid white, blue text, red marker on the left */
     [data-testid="stSidebar"] .stButton button:is([kind="primary"], [data-testid="stBaseButton-primary"]),
     [data-testid="stSidebar"] .stButton button:is([kind="primary"], [data-testid="stBaseButton-primary"]):hover {{
         background-color: {NBA_WHITE} !important; color: {NBA_BLUE} !important;
-        box-shadow: inset 5px 0 0 {NBA_RED}, 0 2px 8px rgba(0, 0, 0, 0.25);
+        border: 1px solid {NBA_WHITE};
+        box-shadow: inset 6px 0 0 {NBA_RED}, 0 4px 12px rgba(0, 0, 0, 0.35);
         transform: none;
     }}
-    /* Quiz: red call-to-action when not active */
+    /* Quiz: red button when not active */
     [data-testid="stSidebar"] .st-key-nav_quiz button:is([kind="secondary"], [data-testid="stBaseButton-secondary"]) {{
-        background-color: {NBA_RED}; border: 1px solid rgba(255, 255, 255, 0.6);
+        background-color: {NBA_RED}; border: 1px solid rgba(255, 255, 255, 0.7);
     }}
     [data-testid="stSidebar"] .st-key-nav_quiz button:is([kind="secondary"], [data-testid="stBaseButton-secondary"]):hover {{
-        background-color: #a50d26;
+        background-color: #a50d26; border-color: {NBA_WHITE};
     }}
     .sb-footer {{
         color: rgba(255, 255, 255, 0.8); text-align: center; font-size: 0.85rem;
@@ -187,9 +192,8 @@ with st.sidebar:
         unsafe_allow_html=True,
     )
 
-    for section, pages in NAV_GROUPS:
-        if section:
-            st.markdown(f"<div class='nav-section'>{section}</div>", unsafe_allow_html=True)
+    # One real button per page; groups are separated by spacing (see CSS)
+    for _, pages in NAV_GROUPS:
         for page in pages:
             st.button(
                 page,
