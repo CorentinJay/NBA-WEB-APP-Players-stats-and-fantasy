@@ -29,7 +29,15 @@ ALL_STAR_START = date(2027, 2, 19)
 ALL_STAR_END   = date(2027, 2, 21)
 
 PAGES = ["🏠 Home", "👤 Players", "⚔️ Player VS", "🏟️ Team Stats", "🏥 Injuries", "🔮 Fantasy Predictions"]
-QUIZ_PAGE = "🧠 QUIZZ NBA"   # separate button, lower in the sidebar
+QUIZ_PAGE = "🧠 QUIZZ NBA"   # separate "Game" section in the sidebar
+
+# Sidebar menu: (section title, pages). None = no title.
+NAV_GROUPS = [
+    (None,      ["🏠 Home"]),
+    ("Stats",   ["👤 Players", "⚔️ Player VS", "🏟️ Team Stats", "🏥 Injuries"]),
+    ("Fantasy", ["🔮 Fantasy Predictions"]),
+    ("Game",    [QUIZ_PAGE]),
+]
 
 # ─────────────────────────────────────────────
 # IMAGES
@@ -80,7 +88,6 @@ st.markdown(f"""
     .home-header p  {{ color: {NBA_WHITE}; margin: 8px 0 0 0; font-size: 1.25rem; font-weight: 600;
                        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6); }}
     [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p {{ color: {NBA_WHITE}; }}
-    .stRadio > label {{ color: {NBA_WHITE} !important; font-weight: bold; }}
     h1 {{ color: {NBA_BLUE}; }}
     h2, h3 {{ color: {NBA_RED}; }}
     [data-testid="stMetricValue"] {{ color: {NBA_BLUE}; }}
@@ -92,8 +99,58 @@ st.markdown(f"""
         cursor: pointer; width: 100%;
     }}
     .stButton > button:hover {{ background-color: {NBA_BLUE}; color: {NBA_WHITE}; }}
-    .st-key-nav_quiz button {{ border: 2px solid {NBA_WHITE}; }}
-    .st-key-nav_quiz button:hover {{ background-color: {NBA_WHITE}; color: {NBA_RED}; }}
+
+    /* ── Sidebar navigation ── */
+    [data-testid="stSidebar"] [data-testid="stVerticalBlock"] {{ gap: 0.3rem; }}
+    .sb-brand {{
+        color: {NBA_WHITE}; text-align: center; font-size: 1.7rem; font-weight: 800;
+        padding: 4px 0 14px 0; margin-bottom: 6px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    }}
+    .sb-brand span {{
+        display: block; font-size: 0.8rem; font-weight: 500;
+        opacity: 0.75; letter-spacing: 0.05em; margin-top: 2px;
+    }}
+    .nav-section {{
+        color: rgba(255, 255, 255, 0.65); font-size: 0.72rem; font-weight: 700;
+        letter-spacing: 0.14em; text-transform: uppercase;
+        margin: 16px 0 2px 12px;
+    }}
+    [data-testid="stSidebar"] .stButton button {{
+        width: 100%; min-height: 0; padding: 9px 14px;
+        border: none; border-radius: 10px;
+        justify-content: flex-start; text-align: left;
+        font-weight: 600; transition: background-color .15s, transform .15s;
+    }}
+    [data-testid="stSidebar"] .stButton button > div {{ justify-content: flex-start; }}
+    [data-testid="stSidebar"] .stButton button p {{ font-size: 1rem; }}
+    /* Inactive item */
+    [data-testid="stSidebar"] .stButton button:is([kind="secondary"], [data-testid="stBaseButton-secondary"]) {{
+        background-color: transparent; color: {NBA_WHITE};
+    }}
+    [data-testid="stSidebar"] .stButton button:is([kind="secondary"], [data-testid="stBaseButton-secondary"]):hover {{
+        background-color: rgba(255, 255, 255, 0.14); color: {NBA_WHITE};
+        transform: translateX(3px);
+    }}
+    /* Active item: white pill + red marker on the left */
+    [data-testid="stSidebar"] .stButton button:is([kind="primary"], [data-testid="stBaseButton-primary"]),
+    [data-testid="stSidebar"] .stButton button:is([kind="primary"], [data-testid="stBaseButton-primary"]):hover {{
+        background-color: {NBA_WHITE}; color: {NBA_BLUE};
+        box-shadow: inset 5px 0 0 {NBA_RED}, 0 2px 8px rgba(0, 0, 0, 0.25);
+    }}
+    /* Quiz: red call-to-action when not active */
+    [data-testid="stSidebar"] .st-key-nav_quiz button:is([kind="secondary"], [data-testid="stBaseButton-secondary"]) {{
+        background-color: {NBA_RED}; border: 1px solid rgba(255, 255, 255, 0.6);
+    }}
+    [data-testid="stSidebar"] .st-key-nav_quiz button:is([kind="secondary"], [data-testid="stBaseButton-secondary"]):hover {{
+        background-color: #a50d26;
+    }}
+    .sb-footer {{
+        color: rgba(255, 255, 255, 0.8); text-align: center; font-size: 0.85rem;
+        margin-top: 28px; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, 0.25);
+    }}
+    .sb-footer a {{ color: {NBA_WHITE} !important; font-weight: 600; }}
+
     .stTabs [data-baseweb="tab-list"] {{ gap: 8px; }}
     .stTabs [data-baseweb="tab"] {{
         background-color: {NBA_WHITE}; color: {NBA_BLUE};
@@ -109,14 +166,10 @@ st.markdown(f"""
 
 if "page" not in st.session_state:
     st.session_state.page = "🏠 Home"
-if "nav_radio" not in st.session_state:
-    st.session_state.nav_radio = st.session_state.page
 
 def go_to(target: str):
-    """Single navigation entry point (sidebar radio, quiz button, home shortcuts)."""
+    """Single navigation entry point (sidebar menu, home shortcuts)."""
     st.session_state.page = target
-    # Radio shows nothing selected while on the quiz page
-    st.session_state.nav_radio = target if target in PAGES else None
     if target != QUIZ_PAGE:
         st.session_state.pop("quiz", None)  # leaving the quiz cancels the current game
 
@@ -125,24 +178,29 @@ def go_to(target: str):
 # ─────────────────────────────────────────────
 
 with st.sidebar:
-    st.markdown(f"<h1 style='color:{NBA_WHITE};text-align:center;'>🏀 NBA Stats</h1>", unsafe_allow_html=True)
-    st.markdown("---")
-
-    st.radio(
-        "Navigation",
-        PAGES,
-        key="nav_radio",
-        label_visibility="collapsed",
-        on_change=lambda: go_to(st.session_state.nav_radio),
+    st.markdown(
+        "<div class='sb-brand'>🏀 NBA Stats<span>Stats · Fantasy · Quiz</span></div>",
+        unsafe_allow_html=True,
     )
 
-    # Quiz entry, well below the other pages
-    st.markdown("<div style='height:160px'></div>", unsafe_allow_html=True)
-    st.button(QUIZ_PAGE, key="nav_quiz", on_click=go_to, args=(QUIZ_PAGE,))
+    for section, pages in NAV_GROUPS:
+        if section:
+            st.markdown(f"<div class='nav-section'>{section}</div>", unsafe_allow_html=True)
+        for page in pages:
+            st.button(
+                page,
+                key="nav_quiz" if page == QUIZ_PAGE else f"nav_{PAGES.index(page)}",
+                type="primary" if st.session_state.page == page else "secondary",
+                use_container_width=True,
+                on_click=go_to,
+                args=(page,),
+            )
 
-    st.markdown("---")
-    st.markdown(f"<p style='color:{NBA_WHITE};text-align:center;'><b>Created by Corentin Jay</b></p>", unsafe_allow_html=True)
-    st.markdown(f"<p style='color:{NBA_WHITE};text-align:center;'><a href='https://github.com/CorentinJay' style='color:{NBA_WHITE};'>GitHub</a></p>", unsafe_allow_html=True)
+    st.markdown(
+        "<div class='sb-footer'>Created by <b>Corentin Jay</b><br>"
+        "<a href='https://github.com/CorentinJay' target='_blank'>GitHub ↗</a></div>",
+        unsafe_allow_html=True,
+    )
 
 # ─────────────────────────────────────────────
 # DATA LOADING
