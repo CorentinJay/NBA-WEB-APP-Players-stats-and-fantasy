@@ -114,7 +114,7 @@ st.markdown(f"""
     .nav-section {{
         color: rgba(255, 255, 255, 0.65); font-size: 0.72rem; font-weight: 700;
         letter-spacing: 0.14em; text-transform: uppercase;
-        margin: 16px 0 2px 12px;
+        line-height: 1.5; margin: 0; padding: 14px 0 2px 14px;
     }}
     [data-testid="stSidebar"] .stButton button {{
         width: 100%; min-height: 0; padding: 9px 14px;
@@ -123,7 +123,10 @@ st.markdown(f"""
         font-weight: 600; transition: background-color .15s, transform .15s;
     }}
     [data-testid="stSidebar"] .stButton button > div {{ justify-content: flex-start; }}
-    [data-testid="stSidebar"] .stButton button p {{ font-size: 1rem; }}
+    /* Label inherits the button color (otherwise the sidebar "p = white" rule wins) */
+    [data-testid="stSidebar"] .stButton button p {{
+        font-size: 1rem; color: inherit !important; margin: 0; line-height: 1.4;
+    }}
     /* Inactive item */
     [data-testid="stSidebar"] .stButton button:is([kind="secondary"], [data-testid="stBaseButton-secondary"]) {{
         background-color: transparent; color: {NBA_WHITE};
@@ -135,8 +138,9 @@ st.markdown(f"""
     /* Active item: white pill + red marker on the left */
     [data-testid="stSidebar"] .stButton button:is([kind="primary"], [data-testid="stBaseButton-primary"]),
     [data-testid="stSidebar"] .stButton button:is([kind="primary"], [data-testid="stBaseButton-primary"]):hover {{
-        background-color: {NBA_WHITE}; color: {NBA_BLUE};
+        background-color: {NBA_WHITE} !important; color: {NBA_BLUE} !important;
         box-shadow: inset 5px 0 0 {NBA_RED}, 0 2px 8px rgba(0, 0, 0, 0.25);
+        transform: none;
     }}
     /* Quiz: red call-to-action when not active */
     [data-testid="stSidebar"] .st-key-nav_quiz button:is([kind="secondary"], [data-testid="stBaseButton-secondary"]) {{
